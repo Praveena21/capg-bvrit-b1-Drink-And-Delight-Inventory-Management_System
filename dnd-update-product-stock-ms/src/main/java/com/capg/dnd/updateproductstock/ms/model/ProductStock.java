@@ -2,7 +2,13 @@ package com.capg.dnd.updateproductstock.ms.model;
 
 import java.util.Date;
 
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.Table;
+@Entity
+@Table
 public class ProductStock {
+	@Id
 	private String orderId;
 	private String name;
 	private double pricePerUnit;
