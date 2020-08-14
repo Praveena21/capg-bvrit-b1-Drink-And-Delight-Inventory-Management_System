@@ -8,6 +8,7 @@ public class DndUpdateProductStockMsApplication {
 
 	public static void main(String[] args) {
 		SpringApplication.run(DndUpdateProductStockMsApplication.class, args);
+		System.out.println("hi project started");
 	}
 
 }
