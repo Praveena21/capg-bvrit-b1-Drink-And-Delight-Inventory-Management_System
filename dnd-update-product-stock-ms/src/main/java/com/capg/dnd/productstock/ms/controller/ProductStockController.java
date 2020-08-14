@@ -1,4 +1,4 @@
-package com.capg.dnd.updateproductstock.ms.controller;
+package com.capg.dnd.productstock.ms.controller;
 
 import org.springframework.web.bind.annotation.RestController;
 

@@ -1,13 +1,13 @@
-package com.capg.dnd.updateproductstock.ms;
+package com.capg.dnd.productstock.ms;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class DndUpdateProductStockMsApplication {
+public class DndProductStockMsApplication {
 
 	public static void main(String[] args) {
-		SpringApplication.run(DndUpdateProductStockMsApplication.class, args);
+		SpringApplication.run(DndProductStockMsApplication.class, args);
 		System.out.println("hi project started");
 	}
 

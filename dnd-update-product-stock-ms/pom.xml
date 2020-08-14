@@ -9,9 +9,9 @@
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>com.capg.dnd</groupId>
-	<artifactId>dnd-update-product-stock-ms</artifactId>
+	<artifactId>dnd-product-stock-ms</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>dnd-update-product-stock-ms</name>
+	<name>dnd-product-stock-ms</name>
 	<description>Demo project for Spring Boot</description>
 
 	<properties>
