@@ -41,6 +41,12 @@ public class SupplierModel {
 		this.name = name;
 	}
 
+	@Override
+	public String toString() {
+		return "SupplierModel [supplierId=" + supplierId + ", name=" + name + ", address=" + address + ", phoneNo="
+				+ phoneNo + "]";
+	}
+
 	public String getAddress() {
 		return address;
 	}
