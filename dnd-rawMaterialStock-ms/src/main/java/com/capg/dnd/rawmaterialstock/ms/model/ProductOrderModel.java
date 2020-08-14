@@ -1,10 +1,10 @@
-package com.capg.dnd.rawmaterial.order.ms.model;
+package com.capg.dnd.rawmaterialstock.ms.model;
 
-import java.sql.Date;
+import java.util.Date;
+
 public class ProductOrderModel {
 	
-	
-public ProductOrderModel(String orderId, String name, String supplierId, double quantityValue,
+	public ProductOrderModel(String orderId, String name, String supplierId, double quantityValue,
 			String quantityUnit, Date dateofOrder, Date dateofDelivery, double pricePerunit, double totalPrice,
 			String deliveryStatus, String warehouseId) {
 		super();
@@ -182,4 +182,6 @@ public boolean equals(Object obj) {
 		return false;
 	return true;
 }
+
+
 }

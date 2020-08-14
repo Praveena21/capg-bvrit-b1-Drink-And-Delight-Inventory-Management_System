@@ -1,4 +1,4 @@
-package com.capg.dnd.rawmaterial.order.ms.model;
+package com.capg.dnd.rawmaterial.ms.model;
 
 import java.sql.Date;
 
