@@ -1,4 +1,4 @@
-package com.capg.dnd.updateproductstock.ms.model;
+package com.capg.dnd.productstock.ms.model;
 
 import java.util.Date;
 
@@ -17,7 +17,7 @@ public class ProductStock {
 	private double price;
 	private String warehouseID;
 	private Date deliveryDate;
-	private Date manufactuingDate;
+	private Date manufacturingDate;
 	private Date expiryDate;
 	private String qualityCheck;
 	private Date processDate;
@@ -26,7 +26,7 @@ public class ProductStock {
 		// TODO Auto-generated constructor stub
 	}
 	public ProductStock(String orderId, String name, double pricePerUnit, double quantityValue, String quantityUnit,
-			double price, String warehouseID, Date deliveryDate, Date manufactuingDate, Date expiryDate,
+			double price, String warehouseID, Date deliveryDate, Date manufacturingDate, Date expiryDate,
 			String qualityCheck, Date processDate) {
 		super();
 		this.orderId = orderId;
@@ -37,7 +37,7 @@ public class ProductStock {
 		this.price = price;
 		this.warehouseID = warehouseID;
 		this.deliveryDate = deliveryDate;
-		this.manufactuingDate = manufactuingDate;
+		this.manufacturingDate = manufacturingDate;
 		this.expiryDate = expiryDate;
 		this.qualityCheck = qualityCheck;
 		this.processDate = processDate;
@@ -90,11 +90,11 @@ public class ProductStock {
 	public void setDeliveryDate(Date deliveryDate) {
 		this.deliveryDate = deliveryDate;
 	}
-	public Date getManufactuingDate() {
-		return manufactuingDate;
+	public Date getManufacturingDate() {
+		return manufacturingDate;
 	}
-	public void setManufactuingDate(Date manufactuingDate) {
-		this.manufactuingDate = manufactuingDate;
+	public void setManufacturingDate(Date manufacturingDate) {
+		this.manufacturingDate = manufacturingDate;
 	}
 	public Date getExpiryDate() {
 		return expiryDate;
@@ -118,8 +118,8 @@ public class ProductStock {
 	public String toString() {
 		return "ProductStock [orderId=" + orderId + ", name=" + name + ", pricePerUnit=" + pricePerUnit
 				+ ", quantityValue=" + quantityValue + ", quantityUnit=" + quantityUnit + ", price=" + price
-				+ ", warehouseID=" + warehouseID + ", deliveryDate=" + deliveryDate + ", manufactuingDate="
-				+ manufactuingDate + ", expiryDate=" + expiryDate + ", qualityCheck=" + qualityCheck + ", processDate="
+				+ ", warehouseID=" + warehouseID + ", deliveryDate=" + deliveryDate + ", manufacturingDate="
+				+ manufacturingDate + ", expiryDate=" + expiryDate + ", qualityCheck=" + qualityCheck + ", processDate="
 				+ processDate + "]";
 	}
 	@Override
@@ -128,7 +128,7 @@ public class ProductStock {
 		int result = 1;
 		result = prime * result + ((deliveryDate == null) ? 0 : deliveryDate.hashCode());
 		result = prime * result + ((expiryDate == null) ? 0 : expiryDate.hashCode());
-		result = prime * result + ((manufactuingDate == null) ? 0 : manufactuingDate.hashCode());
+		result = prime * result + ((manufacturingDate == null) ? 0 : manufacturingDate.hashCode());
 		result = prime * result + ((name == null) ? 0 : name.hashCode());
 		result = prime * result + ((orderId == null) ? 0 : orderId.hashCode());
 		long temp;
@@ -163,10 +163,10 @@ public class ProductStock {
 				return false;
 		} else if (!expiryDate.equals(other.expiryDate))
 			return false;
-		if (manufactuingDate == null) {
-			if (other.manufactuingDate != null)
+		if (manufacturingDate == null) {
+			if (other.manufacturingDate != null)
 				return false;
-		} else if (!manufactuingDate.equals(other.manufactuingDate))
+		} else if (!manufacturingDate.equals(other.manufacturingDate))
 			return false;
 		if (name == null) {
 			if (other.name != null)
@@ -207,5 +207,4 @@ public class ProductStock {
 		return true;
 	}
 	
-	
-}
+	}
