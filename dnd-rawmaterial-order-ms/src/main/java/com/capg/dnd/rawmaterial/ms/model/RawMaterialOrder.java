@@ -3,6 +3,8 @@ package com.capg.dnd.rawmaterial.ms.model;
 import java.sql.Date;
 
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
@@ -11,6 +13,7 @@ import javax.persistence.Table;
 public class RawMaterialOrder {
 
 	@Id
+	@GeneratedValue(strategy = GenerationType.SEQUENCE)
 	private String orderId;
 	private String name;
     private String supplierId;
