@@ -5,6 +5,6 @@ import org.springframework.stereotype.Repository;
 
 import com.capg.dnd.productstock.ms.model.ProductStock;
 @Repository
-public interface IProductStockRepo extends JpaRepository<ProductStock, String>{
+public interface IProductStockRepo extends JpaRepository<ProductStock,String>{
 
 }
