@@ -14,7 +14,6 @@ public interface RawMaterialOrderDetailsService
 	RawMaterialOrderDetails addRawMaterialOrder(RawMaterialOrderDetails r);
 
 	List<RawMaterialOrderDetails> getAllRawMaterialOrders();
-//	Optional<SupplierDetails> getSuplierDetails(int order_id);
 
 	Optional<RawMaterialOrderDetails> getRawMaterialOrderDetailById(int orderId);
 	

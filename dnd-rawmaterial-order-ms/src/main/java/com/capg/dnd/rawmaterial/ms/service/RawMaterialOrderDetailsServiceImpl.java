@@ -19,9 +19,7 @@ public class RawMaterialOrderDetailsServiceImpl implements RawMaterialOrderDetai
 	@Autowired
 	RawMaterialOrderDetailsRepo repo;
 	
-//	@Autowired
-//	SupplierDetailsDao dao1;
-//	
+
 	@Override
 	public RawMaterialOrderDetails addRawMaterialOrder(RawMaterialOrderDetails r) {
 		// TODO Auto-generated method stub
@@ -49,10 +47,5 @@ public class RawMaterialOrderDetailsServiceImpl implements RawMaterialOrderDetai
 		return repo.save(r);
 	}
 
-//	@Override
-//	public Optional<SupplierDetails> getSuplierDetails(int order_id) {
-//		return dao1.findById(order_id);
-//	}
 
-	
 }
