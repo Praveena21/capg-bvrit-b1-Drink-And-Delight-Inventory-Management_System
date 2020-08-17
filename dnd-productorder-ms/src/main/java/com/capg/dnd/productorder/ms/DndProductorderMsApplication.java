@@ -8,6 +8,7 @@ public class DndProductorderMsApplication {
 
 	public static void main(String[] args) {
 		SpringApplication.run(DndProductorderMsApplication.class, args);
+	   System.out.println("hello world");
 	}
 
 }
