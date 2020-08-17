@@ -10,7 +10,7 @@ import javax.persistence.Table;
 
 @Entity
 @Table
-public class RawMaterialOrder {
+public class RawMaterialOrderDetails {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.SEQUENCE)
@@ -27,11 +27,11 @@ public class RawMaterialOrder {
     private String warehouseId;
     
 
-public RawMaterialOrder() {
+public RawMaterialOrderDetails() {
 super();
 }
 
-public RawMaterialOrder(String orderId, String name, String supplierId, double quantityValue, String quantityUnit,
+public RawMaterialOrderDetails(String orderId, String name, String supplierId, double quantityValue, String quantityUnit,
 Date dateOfOrder, Date dateOfDelivery, double pricePerUnit, double totalPrice, String deliveryStatus,
 String warehouseId) {
 super();
