@@ -8,6 +8,7 @@ public class DndSupplierMsApplication {
 
 	public static void main(String[] args) {
 		SpringApplication.run(DndSupplierMsApplication.class, args);
+		System.out.println("Hello Praveena");
 	}
 
 }
