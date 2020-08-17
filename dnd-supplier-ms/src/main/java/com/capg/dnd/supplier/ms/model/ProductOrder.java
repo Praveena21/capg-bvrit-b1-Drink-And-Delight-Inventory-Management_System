@@ -3,10 +3,10 @@ package com.capg.dnd.supplier.ms.model;
 
 
 import java.sql.Date;
-public class ProductOrderModel {
+public class ProductOrder {
 	
 	
-public ProductOrderModel(String orderId, String name, String supplierId, double quantityValue,
+public ProductOrder(String orderId, String name, String supplierId, double quantityValue,
 			String quantityUnit, Date dateofOrder, Date dateofDelivery, double pricePerunit, double totalPrice,
 			String deliveryStatus, String warehouseId) {
 		super();
@@ -135,7 +135,7 @@ public boolean equals(Object obj) {
 		return false;
 	if (getClass() != obj.getClass())
 		return false;
-	ProductOrderModel other = (ProductOrderModel) obj;
+	ProductOrder other = (ProductOrder) obj;
 	if (dateofDelivery == null) {
 		if (other.dateofDelivery != null)
 			return false;
