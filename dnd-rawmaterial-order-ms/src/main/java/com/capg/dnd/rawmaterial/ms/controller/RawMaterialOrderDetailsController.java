@@ -9,7 +9,7 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.ExceptionHandler;
+
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -54,12 +54,12 @@ public class RawMaterialOrderDetailsController {
 	
 	// Get Particular RawMaterialorderDetail
 			@GetMapping(value="/GetRawmaterialOrderDetail/{orderId}")
-			private ResponseEntity<Optional<RawMaterialOrderDetails>> getRawMaterialOrderDetailsById(@PathVariable("orderId") int orderId) {
-				Optional<RawMaterialOrderDetails> d = serviceobj.getRawMaterialOrderDetailById(orderId);
+			private ResponseEntity<RawMaterialOrderDetails> getRawMaterialOrderDetailsById(@PathVariable("orderId") String orderId) {
+				RawMaterialOrderDetails d = serviceobj.getRawMaterialOrderDetailById(orderId);
 				if (d == null) {
 					throw new IdNotFoundException("Id does not exist,so we couldn't fetch details");
 				} else {
-					return new ResponseEntity<Optional<RawMaterialOrderDetails>>(d, new HttpHeaders(), HttpStatus.OK);
+					return new ResponseEntity<RawMaterialOrderDetails>(d,  HttpStatus.OK);
 				}
 			}
 //			@GetMapping(value= "/Supplierdetails/{orderid}")
@@ -84,17 +84,13 @@ public class RawMaterialOrderDetailsController {
 		
 	// Delete RawMaterialOrder
 	@DeleteMapping(value="/DeleteRawMaterialOrder/{orderId}")
-	private ResponseEntity<String> deleteRawMaterialOrder(@PathVariable("orderId") int orderId)
+	private ResponseEntity<String> deleteRawMaterialOrder(@PathVariable("orderId") String orderId)
 		{
 		     serviceobj.deleteRawMaterialOrder(orderId);
 			
 				return new ResponseEntity<String>("RawMaterialOrder deleted successfully", new HttpHeaders(), HttpStatus.OK);
 			}
 	
-	@ExceptionHandler(IdNotFoundException.class)
-	public ResponseEntity<String> userNotFound(IdNotFoundException e) {
-		return new ResponseEntity<String>(e.getMessage(), HttpStatus.NOT_FOUND);
-	}
 	
 	
 }

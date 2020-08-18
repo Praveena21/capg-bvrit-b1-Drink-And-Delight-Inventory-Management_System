@@ -8,6 +8,7 @@ public class DndRawmaterialOrderMsApplication {
 
 	public static void main(String[] args) {
 		SpringApplication.run(DndRawmaterialOrderMsApplication.class, args);
+		
 	}
 
 }

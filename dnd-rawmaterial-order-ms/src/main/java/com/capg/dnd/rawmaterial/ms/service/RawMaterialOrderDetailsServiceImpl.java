@@ -32,12 +32,12 @@ public class RawMaterialOrderDetailsServiceImpl implements RawMaterialOrderDetai
 	}
 
 	@Override
-	public Optional<RawMaterialOrderDetails> getRawMaterialOrderDetailById(int orderId) {
-		return repo.findById(orderId);
+	public RawMaterialOrderDetails getRawMaterialOrderDetailById(String orderId) {
+		return repo.getOne(orderId);
 	}
 
 	@Override
-	public void deleteRawMaterialOrder(int orderId) {
+	public void deleteRawMaterialOrder(String orderId) {
 		repo.deleteById(orderId);
 		
 	}
