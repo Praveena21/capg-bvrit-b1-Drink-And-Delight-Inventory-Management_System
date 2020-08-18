@@ -9,6 +9,8 @@ public interface SupplierService{
     public Supplier addSupplier(Supplier suplier);
 	public boolean deleteSupplier(Long supplierId);
 	public Supplier getSupplierById(Long supplierId);
+			
+	public Supplier updateSupplier(Supplier supplier);
 	public List<Supplier> getAllSupplier();
 	
 }
