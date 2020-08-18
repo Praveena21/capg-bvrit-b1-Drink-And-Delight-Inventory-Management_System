@@ -8,6 +8,7 @@ public class DndRamMaterialStockMsApplication {
 
 	public static void main(String[] args) {
 		SpringApplication.run(DndRamMaterialStockMsApplication.class, args);
+		System.out.println("hello Spring");
 	}
 
 }

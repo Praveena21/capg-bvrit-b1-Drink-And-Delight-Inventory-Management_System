@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.capg.dnd.supplier.ms.exception.SupplierWithIdAlreadyExistException;
 import com.capg.dnd.supplier.ms.exception.SupplierWithIdNotFoundException;
 import com.capg.dnd.supplier.ms.model.Supplier;
 import com.capg.dnd.supplier.ms.repo.SupplierRepo;
@@ -14,6 +15,9 @@ public class SupplierServiceImpl implements SupplierService{
 	SupplierRepo repo;
 	
 	public Supplier addSupplier(Supplier supplier) {
+		if(repo.existsById(supplier.getSupplierId())) {
+			throw new SupplierWithIdAlreadyExistException("Supplier with id : ["+supplier.getSupplierId()+"]Already Exist");
+		}
 		return repo.save(supplier);
 }
 	
@@ -32,14 +36,14 @@ public boolean deleteSupplier(Long supplierId) {
 	public List<Supplier> getAllSupplier(){
 		return repo.findAll();
 	}
-
 	
-	public Supplier updateSupplier(Supplier newsupplier) {
-		Supplier oldsupplier = repo.getOne(newsupplier.getSupplierId());
-				oldsupplier.setName(newsupplier.getName());
-		        oldsupplier.setAddress(newsupplier.getAddress());
-		         oldsupplier.setphoneNo(newsupplier.getphoneNo());
-		return oldsupplier;
+	@Override
+	public Supplier updateSupplier(Supplier supplier) {
+		Supplier oldsupplier = repo.getOne(supplier.getSupplierId());
+		oldsupplier.setName(supplier.getName());
+        oldsupplier.setAddress(supplier.getAddress());
+         oldsupplier.setphoneNo(supplier.getphoneNo());
+return oldsupplier;
 	}
 		
 }

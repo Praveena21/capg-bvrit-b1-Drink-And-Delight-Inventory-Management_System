@@ -1,14 +1,14 @@
-package com.capg.dnd.productorder.ms;
+package com.capg.dnd.distributordetails.ms;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class DndProductorderMsApplication {
+public class Application {
 
 	public static void main(String[] args) {
-		SpringApplication.run(DndProductorderMsApplication.class, args);
-	   System.out.println("hello world");
+		SpringApplication.run(Application.class, args);
+		System.out.println("Hai Pandu");
 	}
 
 }
