@@ -1,14 +1,18 @@
 package com.capg.dnd.distributordetails.service;
 
+import java.util.List;
+
 import com.capg.dnd.distributordetails.model.Distributor;
 
 public interface DistributorService {
 
-	public Distributor addDistributorDetails(Distributor details);
+	public Distributor addDistributor(Distributor distributor);
 	
-	public boolean deleteDistributorDetails(int distributorId);
+	public boolean deleteDistributor(Integer distributorId);
 	
-	public Distributor getDistributorDetails(int distributorId);
+	public Distributor getDistributor(Integer distributorId);
 	
+public Distributor updateDistributor(Distributor distributor);
+public List<Distributor> getAllDistributors();
 
 }
