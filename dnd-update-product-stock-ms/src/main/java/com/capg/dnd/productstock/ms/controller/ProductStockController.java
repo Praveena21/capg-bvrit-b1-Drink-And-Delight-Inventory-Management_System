@@ -9,21 +9,23 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.capg.dnd.productstock.ms.model.ProductStock;
 import com.capg.dnd.productstock.ms.service.ProductStockService;
 
 @RestController
+@RequestMapping("/product")
 public class ProductStockController {
 	@Autowired
 	ProductStockService service;
 
 	@PostMapping("/add")
-	public ProductStock addProductStock(ProductStock stock) {
-
+	public ProductStock addProductStock(@RequestBody ProductStock stock) {
+System.out.println(stock);
 		return service.addProductStock(stock);
-
+		
 	}
 	@DeleteMapping("/delete/{orderid}")
 	public boolean deleteProductStock(@PathVariable String orderId) {
@@ -40,6 +42,6 @@ public class ProductStockController {
 	@PutMapping("/update/{orderId}")
 	public ProductStock updateProductStock(@RequestBody ProductStock stock) {
 		
-		return service.updateProductStock(stock);}
+		return service.updateProductStockDetails(stock);}
 
-}
+     }
