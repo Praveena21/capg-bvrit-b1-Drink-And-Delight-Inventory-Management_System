@@ -12,7 +12,8 @@ public interface DistributorService {
 	
 	public Distributor getDistributor(Integer distributorId);
 	
-public Distributor updateDistributor(Distributor distributor);
-public List<Distributor> getAllDistributors();
+     public Distributor updateDistributor(Distributor distributor);
+
+     public List<Distributor> getAllDistributors();
 
 }

@@ -7,23 +7,28 @@ import com.capg.dnd.distributordetails.exception.DistributorIdAlreadyExistExcept
 import com.capg.dnd.distributordetails.exception.DistributorIdNotFoundException;
 import com.capg.dnd.distributordetails.model.Distributor;
 import com.capg.dnd.distributordetails.repo.DistributorRepo;
+
 @Service
 public  class DistributorServiceImpl implements DistributorService{
+	
+@Autowired
+   DistributorRepo repo;
 
-	@Autowired
-	DistributorRepo repo;
-
+	@Override
 	public Distributor addDistributor(Distributor distributor) {
 		if(repo.existsById(distributor.getDistributorId())) {
 			throw new DistributorIdAlreadyExistException("Distributor with id : ["+distributor.getDistributorId()+"]Already Exist");
 		}
 		return repo.save(distributor);
-}
-	
-public boolean deleteDistributor(Integer distributorId) {
+	}
+
+	@Override
+	public boolean deleteDistributor(Integer distributorId) {
 		repo.deleteById(distributorId);
 		return (!repo.existsById(distributorId));
 	}
+
+	@Override
 	public Distributor getDistributor(Integer distributorId) {
 		if(!repo.existsById(distributorId)) {
 			throw new DistributorIdNotFoundException("Distributor with id : ["+distributorId+"]Not Found");
@@ -31,19 +36,20 @@ public boolean deleteDistributor(Integer distributorId) {
 		}
 		return repo.getOne(distributorId);
 	}
-	
-	public List<Distributor> getAllDistributors(){
-		return repo.findAll();
-	}
-	
+
 	@Override
 	public Distributor updateDistributor(Distributor distributor) {
-		Distributor oldsupplier = repo.getOne(distributor.getDistributorId());
-		oldsupplier.setName(distributor.getName());
-        oldsupplier.setAddress(distributor.getAddress());
-         oldsupplier.setPhoneNo(distributor.getPhoneNo());
-return oldsupplier;
+		Distributor d = repo.getOne(distributor.getDistributorId());
+		d.setName(distributor.getName());
+        d.setAddress(distributor.getAddress());
+        d.setPhoneNo(distributor.getPhoneNo());
+        return d;
 	}
 
-	
+	@Override
+	public List<Distributor> getAllDistributors() {
+		return repo.findAll();
+	}
 }
+
+	

@@ -1,11 +1,13 @@
-package com.capg.dnd.distributordetails.model;
+package dnd.distributordetails.model;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
-import javax.persistence.Table;
+
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 @Entity
-@Table(name="distributor_tbl")
-public class Distributor {
+@JsonIgnoreProperties({"hibernateLazyInitializer","handler"})
+public class DistributorEntity {
 
 	@Id
 	private int distributorId;
@@ -13,11 +15,11 @@ public class Distributor {
 	private String address;
 	private Long phoneNo;
 	
-	public Distributor() {
+	public DistributorEntity() {
 		super();
 	}
 
-	public Distributor(int distributorrId, String name, String address, Long phoneNo, int distributorId) {
+	public DistributorEntity(int distributorrId, String name, String address, Long phoneNo, int distributorId) {
 		super();
 		this.distributorId = distributorId;
 		this.name = name;
@@ -66,5 +68,3 @@ public class Distributor {
 	
 	
 }
-
-
