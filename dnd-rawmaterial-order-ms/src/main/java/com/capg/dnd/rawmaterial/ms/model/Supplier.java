@@ -5,7 +5,7 @@ import javax.persistence.Entity;
 import javax.persistence.Id;
 
 @Entity
-public class SupplierModel {
+public class Supplier {
 
 	@Id
 	private Long supplierId;
@@ -13,7 +13,7 @@ public class SupplierModel {
 	private String address;
 	private Long phoneNo;
 	
-	public SupplierModel(Long supplierId, String name, String address, long phoneNo) {
+	public Supplier(Long supplierId, String name, String address, long phoneNo) {
 		super();
 		this.supplierId = supplierId;
 		this.name = name;
@@ -21,7 +21,7 @@ public class SupplierModel {
 		this.phoneNo= phoneNo;
 	}
 
-	public SupplierModel() {
+	public Supplier() {
 		super();
 	}
 
