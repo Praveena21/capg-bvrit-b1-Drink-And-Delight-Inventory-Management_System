@@ -1,11 +1,11 @@
-package com.capg.dnd.distributordetails.model;
+package com.capg.dnd.productstock.ms.model;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
-@Entity
+
 public class Distributor {
 
-	@Id
+	
 	private int distributorId;
 	private String name;
 	private String address;
@@ -64,5 +64,3 @@ public class Distributor {
 	
 	
 }
-
-

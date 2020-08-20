@@ -5,10 +5,9 @@ import java.sql.Date;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
-@Entity
-@Table
+
 public class ProductOrder {
-	@Id
+	
 	private String orderId;
 	private String name;
 	private String supplierId;
