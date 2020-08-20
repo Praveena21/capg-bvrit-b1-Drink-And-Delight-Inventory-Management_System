@@ -1,12 +1,18 @@
 package com.capg.dnd.supplier.ms.model;
 
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 @Entity
+@JsonIgnoreProperties({"hibernateLazyInitializer","handler"})
 public class Supplier {
 
 	@Id
+	
 	private Long supplierId;
 	private String name;
 	private String address;

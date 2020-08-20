@@ -15,9 +15,9 @@ public interface RawMaterialOrderDetailsService
 
 	List<RawMaterialOrderDetails> getAllRawMaterialOrders();
 
-	Optional<RawMaterialOrderDetails> getRawMaterialOrderDetailById(int orderId);
+	RawMaterialOrderDetails getRawMaterialOrderDetailById(String orderId);
 	
-	void deleteRawMaterialOrder(int orderId);
+	void deleteRawMaterialOrder(String orderId);
 
 	RawMaterialOrderDetails updateRawMaterialOrder(RawMaterialOrderDetails r);
 }

@@ -45,24 +45,25 @@ public boolean deleteSupplier(@PathVariable("supplierId") Long supplierId) {
 }
 @GetMapping("/id/{supplierId}")
 public ResponseEntity<Supplier>getSupplierById(@PathVariable("supplierId") Long supplierId) {
-Long supplier = null;
-Supplier info = service.getSupplierById(supplier);
-return new ResponseEntity<Supplier>(info,HttpStatus.OK);
+
+return new ResponseEntity<Supplier>(service.getSupplierById(supplierId),HttpStatus.OK);
 }
 @GetMapping("/all")
 public List<Supplier> getAllSupplier(){
 	return service.getAllSupplier();
 }
 
-@PutMapping("/update/{id}")
-public Supplier updateSupplier(@RequestBody Supplier supplier) {
-	return  service.updateSupplier(supplier);
+@PutMapping("/updateSupplierId")
+public Supplier updateSupplier(@RequestBody Supplier supplier)
+{
+	return service.updateSupplier(supplier);
 }
 @GetMapping("/RMdetails/{supplierId}")
-public Supplier fetchRawMaterialDetails(Long supplierId,String deliveryStatus) {
+public Supplier fetchRawMaterialDetails(Long supplierId,String delivereyStatus) {
 	return null;
 	
 }
 }
+
 	
 	
