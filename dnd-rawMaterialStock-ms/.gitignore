@@ -1,7 +1,3 @@
-<<<<<<< HEAD
-/bin/
-/target/
-=======
 HELP.md
 target/
 !.mvn/wrapper/maven-wrapper.jar
@@ -35,4 +31,3 @@ build/
 
 ### VS Code ###
 .vscode/
->>>>>>> branch 'master' of https://github.com/Praveena21/capg-bvrit-b1-Drink-And-Delight-Inventory-Management_System.git

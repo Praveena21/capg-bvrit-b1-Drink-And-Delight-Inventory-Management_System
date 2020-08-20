@@ -1,12 +1,8 @@
-<<<<<<< HEAD
-/bin/
-/target/
-=======
 HELP.md
 target/
 !.mvn/wrapper/maven-wrapper.jar
-!**/src/main/**/target/
-!**/src/test/**/target/
+!**/src/main/**
+!**/src/test/**
 
 ### STS ###
 .apt_generated
@@ -30,9 +26,6 @@ target/
 /nbdist/
 /.nb-gradle/
 build/
-!**/src/main/**/build/
-!**/src/test/**/build/
 
 ### VS Code ###
 .vscode/
->>>>>>> branch 'master' of https://github.com/Praveena21/capg-bvrit-b1-Drink-And-Delight-Inventory-Management_System.git
