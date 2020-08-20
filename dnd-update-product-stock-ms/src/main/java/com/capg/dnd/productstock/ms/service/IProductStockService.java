@@ -9,6 +9,6 @@ public interface IProductStockService {
 	public boolean deleteProductStock(String orderId);
 	public ProductStock getProductStockDetails(String orderId);
 	public List<ProductStock> getAllProductStockDetails();
-	public ProductStock updateProductStock(ProductStock newStock);
+	public ProductStock updateProductStockDetails(ProductStock newStock);
 
 }
