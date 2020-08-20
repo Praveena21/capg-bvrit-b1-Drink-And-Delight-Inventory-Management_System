@@ -1,7 +1,7 @@
 package dnd.distributordetails.model;
 import java.sql.Date;
 import java.time.LocalDate;
-public class RawMaterialOrder {
+public class RawMaterialOrderDetails {
 
 	private String orderId;
 	private String name;
@@ -16,11 +16,11 @@ public class RawMaterialOrder {
     private String warehouseId;
     
 
-public RawMaterialOrder() {
+public RawMaterialOrderDetails() {
 super();
 }
 
-public RawMaterialOrder(String orderId, String name, String supplierId, double quantityValue, String quantityUnit,
+public RawMaterialOrderDetails(String orderId, String name, String supplierId, double quantityValue, String quantityUnit,
 Date dateOfOrder, Date dateOfDelivery, double pricePerUnit, double totalPrice, String deliveryStatus,
 String warehouseId) {
 super();
