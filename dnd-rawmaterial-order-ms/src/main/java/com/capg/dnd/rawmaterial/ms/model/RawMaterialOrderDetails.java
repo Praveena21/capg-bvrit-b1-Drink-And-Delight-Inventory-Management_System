@@ -1,10 +1,14 @@
 package com.capg.dnd.rawmaterial.ms.model;
 
-import java.sql.Date;
 
+import java.util.Date; 
+
+import javax.persistence.Column;
 import javax.persistence.Entity;
 
 import javax.persistence.Id;
+
+import org.springframework.format.annotation.DateTimeFormat;
 
 
 @Entity
@@ -18,7 +22,9 @@ public class RawMaterialOrderDetails {
     private String supplierId;
     private double quantityValue;
     private String quantityUnit;
+    @DateTimeFormat(pattern="yyyy-MM-dd")
     private Date dateOfOrder;
+    @DateTimeFormat(pattern="yyyy-MM-dd")
     private Date dateOfDelivery;
     private double pricePerUnit;
     private double totalPrice;

@@ -2,7 +2,7 @@ package com.capg.dnd.rawmaterial.ms.controller;
 
 
 import java.util.List;
-import java.util.Optional;
+
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
@@ -32,36 +32,45 @@ public class RawMaterialOrderDetailsController {
 	
 	//Add RawMaterialOrder
 	@PostMapping(value="/addRawMaterialOrder")
-	public ResponseEntity<String>addRawMaterialOrder(@RequestBody RawMaterialOrderDetails r )
-	{
-		RawMaterialOrderDetails e = serviceobj.addRawMaterialOrder(r);
-		if(e == null)
-		{
-			throw new IdNotFoundException("Enter Valid Id");
+	public RawMaterialOrderDetails addRawMaterialOrder(@RequestBody RawMaterialOrderDetails r) throws IdAlreadyExistsException {
+		
+		return serviceobj.addRawMaterialOrder(r);
 		}
-		else {
-			return new ResponseEntity<String>("RawMaterialOrder placed successfully",new HttpHeaders(),HttpStatus.OK);		
-		}
-	}
+//	public ResponseEntity<String>addRawMaterialOrder(@RequestBody RawMaterialOrderDetails r )
+//	{
+//		RawMaterialOrderDetails e = serviceobj.addRawMaterialOrder(r);
+//		if(e == null)
+//		{
+//			throw new IdNotFoundException("Enter Valid Id");
+//		}
+//		else {
+//			return new ResponseEntity<String>("RawMaterialOrder placed by praneeth successfully",new HttpHeaders(),HttpStatus.OK);		
+//		}
+//	}
 
 	//Get all RawMaterialOrders
 	@GetMapping(value="/GetAllRawMaterialOrders")
 	private ResponseEntity<List<RawMaterialOrderDetails>> getAllRawMaterialOrders() 
 	    {
 		List<RawMaterialOrderDetails> RawMaterialOrderlist = serviceobj.getAllRawMaterialOrders();
-		return new ResponseEntity<List<RawMaterialOrderDetails>>(RawMaterialOrderlist, new HttpHeaders(), HttpStatus.OK);
+		return new ResponseEntity<List<RawMaterialOrderDetails>>(RawMaterialOrderlist, HttpStatus.OK);
         }
 	
 	// Get Particular RawMaterialorderDetail
-			@GetMapping(value="/GetRawmaterialOrderDetail/{orderId}")
-			private ResponseEntity<RawMaterialOrderDetails> getRawMaterialOrderDetailsById(@PathVariable("orderId") String orderId) {
-				RawMaterialOrderDetails d = serviceobj.getRawMaterialOrderDetailById(orderId);
-				if (d == null) {
-					throw new IdNotFoundException("Id does not exist,so we couldn't fetch details");
-				} else {
-					return new ResponseEntity<RawMaterialOrderDetails>(d,  HttpStatus.OK);
+		//	@GetMapping(value="/GetRawmaterialOrderDetail/{orderId}")
+			//private ResponseEntity<RawMaterialOrderDetails> getRawMaterialOrderDetailsById(@PathVariable("orderId") String orderId) {
+				//RawMaterialOrderDetails d = serviceobj.getRawMaterialOrderDetailById(orderId);
+				//if (d == null) {
+					//throw new IdNotFoundException("Id does not exist,so we couldn't fetch details");
+			//	} else {
+				//	return new ResponseEntity<RawMaterialOrderDetails>(d,  HttpStatus.OK);
+				//}
+				
+			//}
+			@GetMapping("/id/{orderId}")
+			public RawMaterialOrderDetails getRawNaterialOrderDetails(@PathVariable("orderId") String orderId) throws IdNotFoundException {
+				return serviceobj.getRawMaterialOrderDetailById(orderId);
 				}
-			}
 //			@GetMapping(value= "/Supplierdetails/{orderid}")
 //			private Optional<SupplierDetails> getSuplierDetails(@PathVariable("orderid") int order_id) {
 //				Optional<SupplierDetails> details=serviceobj.getSuplierDetails(order_id);
