@@ -11,6 +11,7 @@ import javax.jws.soap.InitParam;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.capg.dnd.productorder.ms.exception.ProductOrderIdAlreadyExistsException;
 import com.capg.dnd.productorder.ms.model.*;
 import com.capg.dnd.productorder.ms.repository.*;
 
@@ -28,11 +29,15 @@ public class ProductOrderServiceImpl implements IProductOrderService {
 	@Autowired
 	IProductOrderRepo repo;
 	
-	
+
 	@Override
-	public ProductOrder addProductOrder(ProductOrder order) {
-		// TODO Auto-generated method stub
-		return repo.save(order);
+	public ProductOrder addProductOrder(ProductOrder order) throws ProductOrderIdAlreadyExistsException {
+		if(repo.existsById(order.getOrderId())) {
+			throw new ProductOrderIdAlreadyExistsException("orderId already Exists");
+		}
+		else {
+	return repo.save(order);
+		}
 	}
 
 	@Override

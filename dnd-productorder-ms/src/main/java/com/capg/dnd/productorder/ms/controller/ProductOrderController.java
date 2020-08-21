@@ -20,11 +20,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 	import org.springframework.web.bind.annotation.RequestMapping;
 	import org.springframework.web.bind.annotation.RestController;
 
+import com.capg.dnd.productorder.ms.exception.ProductOrderIdAlreadyExistsException;
 import com.capg.dnd.productorder.ms.exception.ProductOrderIdNotFoundException;
 import com.capg.dnd.productorder.ms.model.ProductOrder;
 import com.capg.dnd.productorder.ms.service.IProductOrderService;
-
-	
 
 
 	@RestController
@@ -40,7 +39,7 @@ import com.capg.dnd.productorder.ms.service.IProductOrderService;
 		
 		//Add ProductOrder
 		@PostMapping(value="/addProductOrder")
-		public ResponseEntity<ProductOrder>addProductOrder(@RequestBody ProductOrder r )
+		public ResponseEntity<ProductOrder>addProductOrder(@RequestBody ProductOrder r ) throws ProductOrderIdAlreadyExistsException
 		{
 			ProductOrder e = serviceobj.addProductOrder(r);
 			if(e == null)
@@ -91,7 +90,8 @@ import com.capg.dnd.productorder.ms.service.IProductOrderService;
 		@DeleteMapping(value="/DeleteProductOrder/{orderId}")
 		private ResponseEntity<String> deleteProductOrder(@PathVariable("orderId") String orderId)
 			{
-			     serviceobj.deleteProductOrder(orderId);
+			     
+			serviceobj.deleteProductOrder(orderId);
 				
 					return new ResponseEntity<String>("ProductOrder deleted successfully", new HttpHeaders(), HttpStatus.OK);
 				}
