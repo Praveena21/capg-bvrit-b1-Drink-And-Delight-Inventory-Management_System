@@ -81,15 +81,17 @@ public class RawMaterialOrderDetailsController {
 			
     //Update RawMaterialOrder
     @PutMapping(value="/UpdateUser")
-	public ResponseEntity<String> updateRawMaterialOrder(@RequestBody RawMaterialOrderDetails r)
-		{
-    	RawMaterialOrderDetails e = serviceobj.updateRawMaterialOrder(r);
-			if (e == null) {
-				throw new IdNotFoundException("Update Operation Unsuccessful,Provided Id does not exist");
-			} else {
-				return new ResponseEntity<String>("RawMaterialOrder updated successfully", new HttpHeaders(), HttpStatus.OK);
-			}
-		}
+    public RawMaterialOrderDetails updateRawMaterialOrder(@RequestBody RawMaterialOrderDetails r) throws UserNotFoundException{
+    return serviceobj.updateRawMaterialOrder(r);}
+//	public ResponseEntity<String> updateRawMaterialOrder(@RequestBody RawMaterialOrderDetails r)
+//		{
+//    	RawMaterialOrderDetails e = serviceobj.updateRawMaterialOrder(r);
+//			if (e == null) {
+//				throw new IdNotFoundException("Update Operation Unsuccessful,Provided Id does not exist");
+//			} else {
+//				return new ResponseEntity<String>("RawMaterialOrder updated successfully", new HttpHeaders(), HttpStatus.OK);
+//			}
+//		}
 		
 	// Delete RawMaterialOrder
 	@DeleteMapping(value="/DeleteRawMaterialOrder/{orderId}")
@@ -97,7 +99,7 @@ public class RawMaterialOrderDetailsController {
 		{
 		     serviceobj.deleteRawMaterialOrder(orderId);
 			
-				return new ResponseEntity<String>("RawMaterialOrder deleted successfully", new HttpHeaders(), HttpStatus.OK);
+				return new ResponseEntity <String>("RawMaterialOrder deleted successfully", new HttpHeaders(), HttpStatus.OK);
 			}
 	
 	

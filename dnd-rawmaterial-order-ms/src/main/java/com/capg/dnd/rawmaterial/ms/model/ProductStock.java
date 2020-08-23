@@ -23,7 +23,7 @@ public class ProductStock {
 	private Date processDate;
 	public ProductStock() {
 		super();
-		// TODO Auto-generated constructor stub
+		
 	}
 	public ProductStock(String orderId, String name, double pricePerUnit, double quantityValue, String quantityUnit,
 			double price, String warehouseID, Date deliveryDate, Date manufacturingDate, Date expiryDate,
