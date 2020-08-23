@@ -7,6 +7,8 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
 import dnd.distributordetails.Repo.DistributorRepo;
+import dnd.distributordetails.exception.DistributorIdAlreadyExistException;
+import dnd.distributordetails.exception.DistributorIdNotFoundException;
 import dnd.distributordetails.model.DistributorEntity;
 
 @Service
@@ -18,6 +20,9 @@ public class DistributorServiceImpl implements DistributorService{
     //RestTemplate restTemplate;
     
 	public DistributorEntity addDistributorDetails(DistributorEntity details) {
+    	if(repo.existsById(details.getDistributorId())) {
+			throw new DistributorIdAlreadyExistException("Distributor with id : ["+details.getDistributorId()+"]Already Exist");
+		}
 		return repo.save(details);
 	}
 
@@ -29,6 +34,9 @@ public class DistributorServiceImpl implements DistributorService{
 	
 
 	public DistributorEntity getDistributorDetails(int distributorId) {
+		if(!repo.existsById(distributorId)) {
+			throw new DistributorIdNotFoundException("Distributor with id : ["+distributorId+"]Not Found");
+		}
 		return repo.getOne(distributorId);
 	}
 

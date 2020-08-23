@@ -5,16 +5,25 @@ import java.sql.Date;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
+
+import org.springframework.format.annotation.DateTimeFormat;
 @Entity
 public class ProductOrder {
 	@Id
 	private String orderId;
 	private String name;
-	private String supplierId;
+	private String distributorId;
 	private double quantityValue;
+	
 	private String quantityUnit;
+	 @DateTimeFormat(pattern="yyyy-MM-dd")
 	private Date dateofOrder;
+	 @DateTimeFormat(pattern="yyyy-MM-dd")
 	private Date dateofDelivery;
+	private double pricePerunit;
+	private double totalPrice;
+	private String deliveryStatus;
+	private String warehouseId;
 	
 	
 public ProductOrder() {
@@ -22,13 +31,13 @@ public ProductOrder() {
 		// TODO Auto-generated constructor stub
 	}
 
-public ProductOrder(String orderId, String name, String supplierId, double quantityValue,
+public ProductOrder(String orderId, String name, String distributorId, double quantityValue,
 			String quantityUnit, Date dateofOrder, Date dateofDelivery, double pricePerunit, double totalPrice,
 			String deliveryStatus, String warehouseId) {
 		super();
 		this.orderId = orderId;
 		this.name = name;
-		this.supplierId = supplierId;
+		this.distributorId = distributorId;
 		this.quantityValue = quantityValue;
 		this.quantityUnit = quantityUnit;
 		this.dateofOrder = dateofOrder;
@@ -51,11 +60,11 @@ public String getName() {
 public void setName(String name) {
 	this.name = name;
 }
-public String getSupplierId() {
-	return supplierId;
+public String getdistributorId() {
+	return distributorId;
 }
-public void setSupplierId(String supplierId) {
-	this.supplierId = supplierId;
+public void setdistributorId(String distributorId) {
+	this.distributorId = distributorId;
 }
 public double getQuantityValue() {
 	return quantityValue;
@@ -105,13 +114,10 @@ public String getWarehouseId() {
 public void setWarehouseId(String warehouseId) {
 	this.warehouseId = warehouseId;
 }
-private double pricePerunit;
-private double totalPrice;
-private String deliveryStatus;
-private String warehouseId;
+
 @Override
 public String toString() {
-	return "ProductOrderService [orderId=" + orderId + ", name=" + name + ", supplierId=" + supplierId
+	return "ProductOrderService [orderId=" + orderId + ", name=" + name + ", distributorId=" + distributorId
 			+ ", quantityValue=" + quantityValue + ", quantityUnit=" + quantityUnit + ", dateofOrder=" + dateofOrder
 			+ ", dateofDelivery=" + dateofDelivery + ", pricePerunit=" + pricePerunit + ", totalPrice=" + totalPrice
 			+ ", deliveryStatus=" + deliveryStatus + ", warehouseId=" + warehouseId + "]";
@@ -131,7 +137,7 @@ public int hashCode() {
 	result = prime * result + ((quantityUnit == null) ? 0 : quantityUnit.hashCode());
 	temp = Double.doubleToLongBits(quantityValue);
 	result = prime * result + (int) (temp ^ (temp >>> 32));
-	result = prime * result + ((supplierId == null) ? 0 : supplierId.hashCode());
+	result = prime * result + ((distributorId == null) ? 0 : distributorId.hashCode());
 	temp = Double.doubleToLongBits(totalPrice);
 	result = prime * result + (int) (temp ^ (temp >>> 32));
 	result = prime * result + ((warehouseId == null) ? 0 : warehouseId.hashCode());
@@ -180,10 +186,10 @@ public boolean equals(Object obj) {
 		return false;
 	if (Double.doubleToLongBits(quantityValue) != Double.doubleToLongBits(other.quantityValue))
 		return false;
-	if (supplierId == null) {
-		if (other.supplierId != null)
+	if (distributorId == null) {
+		if (other.distributorId != null)
 			return false;
-	} else if (!supplierId.equals(other.supplierId))
+	} else if (!distributorId.equals(other.distributorId))
 		return false;
 	if (Double.doubleToLongBits(totalPrice) != Double.doubleToLongBits(other.totalPrice))
 		return false;

@@ -2,6 +2,8 @@ package com.capg.dnd.rawmaterialstock.ms.service;
 
 import java.util.List;
 
+import javax.annotation.PostConstruct;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -11,10 +13,12 @@ import com.capg.dnd.rawmaterialstock.ms.repository.IupdatermstockDAO;
 @Service
 public class UpdateRMstockServiceImpl implements IUpdateRMStockService {
 	
+	
 	@Autowired
 	IupdatermstockDAO repo;
 	
 	public RawMaterialStock addRawMaterialStock(RawMaterialStock stock) {
+		
 		return repo.save(stock);
 	}
 	

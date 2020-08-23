@@ -3,7 +3,7 @@ package com.capg.dnd.productorder.ms.model;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 @Entity
-public class Distributor {
+public class DistributorEntity {
 
 	@Id
 	private int distributorId;
@@ -11,11 +11,11 @@ public class Distributor {
 	private String address;
 	private Long phoneNo;
 	
-	public Distributor() {
+	public DistributorEntity() {
 		super();
 	}
 
-	public Distributor(int distributorrId, String name, String address, Long phoneNo, int distributorId) {
+	public DistributorEntity(int distributorrId, String name, String address, Long phoneNo, int distributorId) {
 		super();
 		this.distributorId = distributorId;
 		this.name = name;

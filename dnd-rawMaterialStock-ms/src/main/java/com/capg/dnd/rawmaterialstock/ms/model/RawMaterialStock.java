@@ -5,6 +5,8 @@ import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
 @Entity
 @Table
 
@@ -18,9 +20,12 @@ public class RawMaterialStock {
 	private String quantityUnit;
 	private double price;
 	private String warehouseId;
-	private Date deliveryDate;
+	@DateTimeFormat(pattern="yyyy/MM/dd")
+    private Date deliveryDate;
+	@DateTimeFormat(pattern="yyyy/MM/dd")
 	private Date manufactuingDate;
-	private Date expiryDate;
+	@DateTimeFormat(pattern="yyyy/MM/dd")
+    private Date expiryDate;
 	private String qualityCheck;
 	private Date processDate;
 

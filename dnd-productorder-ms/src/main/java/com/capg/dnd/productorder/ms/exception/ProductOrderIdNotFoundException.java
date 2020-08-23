@@ -9,6 +9,8 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 @ResponseStatus(code = HttpStatus.NOT_FOUND,reason  = " ProductOrderId not Found", value = HttpStatus.NOT_FOUND)
 public class ProductOrderIdNotFoundException extends RuntimeException{
 	
+	private static final long serialVersionUID = 1L;
+
 	public ProductOrderIdNotFoundException(String msg) {
 		super(msg);
 	}

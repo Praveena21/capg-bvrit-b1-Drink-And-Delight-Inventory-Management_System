@@ -2,24 +2,34 @@ package com.capg.dnd.rawmaterialstock.ms.controller;
 
 import java.util.List;
 
+import javax.annotation.PostConstruct;
+
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
 import com.capg.dnd.rawmaterialstock.ms.model.RawMaterialStock;
 import com.capg.dnd.rawmaterialstock.ms.service.UpdateRMstockServiceImpl;
+@RestController
+@RequestMapping("/RawMaterialStock")
 
 public class UpdateRmStockMS {
+	
 	@Autowired
+
 	UpdateRMstockServiceImpl service;
 	
 	@PostMapping("/add")
-	public RawMaterialStock addRawMaterialStock(@RequestBody RawMaterialStock stock) {
-		return service.addRawMaterialStock(stock);
+	public ResponseEntity<RawMaterialStock> addRawMaterialStock(@RequestBody RawMaterialStock stock) {
+		return new ResponseEntity<RawMaterialStock>(stock,HttpStatus.OK);
 	}
 	
 	@DeleteMapping("/delete/{orderId}")
