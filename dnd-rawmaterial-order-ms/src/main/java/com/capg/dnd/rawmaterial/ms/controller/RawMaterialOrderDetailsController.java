@@ -21,6 +21,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.capg.dnd.rawmaterial.ms.exceptions.*;
 import com.capg.dnd.rawmaterial.ms.model.*;
 import com.capg.dnd.rawmaterial.ms.service.*;
+import com.netflix.hystrix.contrib.javanica.annotation.HystrixCommand;
 
 
 @RestController
@@ -36,17 +37,6 @@ public class RawMaterialOrderDetailsController {
 		
 		return serviceobj.addRawMaterialOrder(r);
 		}
-//	public ResponseEntity<String>addRawMaterialOrder(@RequestBody RawMaterialOrderDetails r )
-//	{
-//		RawMaterialOrderDetails e = serviceobj.addRawMaterialOrder(r);
-//		if(e == null)
-//		{
-//			throw new IdNotFoundException("Enter Valid Id");
-//		}
-//		else {
-//			return new ResponseEntity<String>("RawMaterialOrder placed by praneeth successfully",new HttpHeaders(),HttpStatus.OK);		
-//		}
-//	}
 
 	//Get all RawMaterialOrders
 	@GetMapping(value="/GetAllRawMaterialOrders")
@@ -56,29 +46,15 @@ public class RawMaterialOrderDetailsController {
 		return new ResponseEntity<List<RawMaterialOrderDetails>>(RawMaterialOrderlist, HttpStatus.OK);
         }
 	
-	// Get Particular RawMaterialorderDetail
-		//	@GetMapping(value="/GetRawmaterialOrderDetail/{orderId}")
-			//private ResponseEntity<RawMaterialOrderDetails> getRawMaterialOrderDetailsById(@PathVariable("orderId") String orderId) {
-				//RawMaterialOrderDetails d = serviceobj.getRawMaterialOrderDetailById(orderId);
-				//if (d == null) {
-					//throw new IdNotFoundException("Id does not exist,so we couldn't fetch details");
-			//	} else {
-				//	return new ResponseEntity<RawMaterialOrderDetails>(d,  HttpStatus.OK);
-				//}
+	
 				
 			//}
 			@GetMapping("/id/{orderId}")
+			@HystrixCommand(fallbackMethod="IdNotFoundFallback")
 			public RawMaterialOrderDetails getRawNaterialOrderDetails(@PathVariable("orderId") String orderId) throws IdNotFoundException {
 				return serviceobj.getRawMaterialOrderDetailById(orderId);
 				}
-//			@GetMapping(value= "/Supplierdetails/{orderid}")
-//			private Optional<SupplierDetails> getSuplierDetails(@PathVariable("orderid") int order_id) {
-//				Optional<SupplierDetails> details=serviceobj.getSuplierDetails(order_id);
-//				
-//				return details; 
-//			}
-	
-			
+
     //Update RawMaterialOrder
     @PutMapping(value="/UpdateUser")
     public RawMaterialOrderDetails updateRawMaterialOrder(@RequestBody RawMaterialOrderDetails r) throws UserNotFoundException{
@@ -101,6 +77,10 @@ public class RawMaterialOrderDetailsController {
 			
 				return new ResponseEntity <String>("RawMaterialOrder deleted successfully", new HttpHeaders(), HttpStatus.OK);
 			}
+	public RawMaterialOrderDetails IdNotFoundFallback (@PathVariable("orderId") String orderId) {
+		return new RawMaterialOrderDetails("1000", "tv", 100000);
+		
+	}
 	
 	
 	

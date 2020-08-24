@@ -15,6 +15,23 @@ import org.springframework.format.annotation.DateTimeFormat;
 
 public class RawMaterialOrderDetails {
 
+	public RawMaterialOrderDetails(String orderId, String name, double totalPrice) {
+		super();
+		this.orderId = orderId;
+		this.name = name;
+		this.totalPrice = totalPrice;
+	}
+
+
+
+	public RawMaterialOrderDetails(String orderId, String name) {
+		super();
+		this.orderId = orderId;
+		this.name = name;
+	}
+
+
+
 	@Id
 	
 	private String orderId;
