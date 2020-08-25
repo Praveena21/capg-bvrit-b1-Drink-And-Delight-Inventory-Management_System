@@ -9,7 +9,11 @@ import javax.annotation.PostConstruct;
 import javax.jws.soap.InitParam;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.ParameterizedTypeReference;
+import org.springframework.http.HttpMethod;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
+import org.springframework.web.client.RestTemplate;
 
 import com.capg.dnd.productorder.ms.exception.ProductOrderIdAlreadyExistsException;
 import com.capg.dnd.productorder.ms.model.*;
@@ -28,7 +32,8 @@ public class ProductOrderServiceImpl implements IProductOrderService {
 	
 	@Autowired
 	IProductOrderRepo repo;
-	
+	@Autowired
+	RestTemplate rt;
 
 	@Override
 	public ProductOrder addProductOrder(ProductOrder order) throws ProductOrderIdAlreadyExistsException {
@@ -59,6 +64,22 @@ public class ProductOrderServiceImpl implements IProductOrderService {
 	@Override
 	public ProductOrder updateProductOrder(ProductOrder order) {
 		return repo.save(order);
+	}
+
+	@Override
+	public DistributorEntity[] fetchDistributorIds() {
+DistributorEntity[] distributorList= rt.getForObject("http://localhost:8800/distributor/all", DistributorEntity[].class);
+//rt.exchange("http://localhost:8800/distributor/all", HttpMethod.GET, null, new ParameterizedTypeReference<List<DistributorEntity>>() {
+
+System.out.println(distributorList);
+		return distributorList;
+	}
+
+
+	@Override
+	public DistributorEntity fetchDistributorDetail(int distributorId) {
+		DistributorEntity distributorDetail=rt.getForObject("http://localhost:8800/distributor/id/"+distributorId , DistributorEntity.class);
+		return distributorDetail;
 	}
 
 

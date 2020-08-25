@@ -15,7 +15,7 @@ public class DistributorEntity {
 		super();
 	}
 
-	public DistributorEntity( String name, String address, Long phoneNo, int distributorId) {
+	public DistributorEntity(int distributorrId, String name, String address, Long phoneNo, int distributorId) {
 		super();
 		this.distributorId = distributorId;
 		this.name = name;

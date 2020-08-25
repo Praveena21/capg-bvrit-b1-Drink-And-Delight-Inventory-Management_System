@@ -3,10 +3,10 @@ package com.capg.dnd.productorder.ms.model;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 
-@Entity
+
 public class Supplier {
 
-	@Id
+	
 	private Long supplierId;
 	private String name;
 	private String address;

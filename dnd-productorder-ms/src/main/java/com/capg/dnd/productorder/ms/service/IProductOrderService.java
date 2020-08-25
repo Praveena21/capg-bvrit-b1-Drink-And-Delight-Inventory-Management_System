@@ -1,9 +1,11 @@
 package com.capg.dnd.productorder.ms.service;
 
 import java.util.List;
-import java.util.Optional;
+
+import org.springframework.http.ResponseEntity;
 
 import com.capg.dnd.productorder.ms.exception.ProductOrderIdAlreadyExistsException;
+import com.capg.dnd.productorder.ms.model.DistributorEntity;
 import com.capg.dnd.productorder.ms.model.ProductOrder;
 
 public interface IProductOrderService {
@@ -19,5 +21,10 @@ public interface IProductOrderService {
 		void deleteProductOrder(String orderId);
 
 		ProductOrder updateProductOrder(ProductOrder order);
+		
+		DistributorEntity[] fetchDistributorIds();
+		
+		DistributorEntity fetchDistributorDetail(int distributorId);
+		
 	}
 

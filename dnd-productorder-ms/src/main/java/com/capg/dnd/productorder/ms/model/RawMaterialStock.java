@@ -5,12 +5,10 @@ import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
-@Entity
-@Table
 
 public class RawMaterialStock {
 
-	@Id
+	
 	private String orderId;
 	private String name;
 	private double pricePerUnit;

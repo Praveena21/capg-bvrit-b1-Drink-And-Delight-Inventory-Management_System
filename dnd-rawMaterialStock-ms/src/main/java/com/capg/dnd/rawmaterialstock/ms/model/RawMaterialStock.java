@@ -28,6 +28,21 @@ public class RawMaterialStock {
     private Date expiryDate;
 	private String qualityCheck;
 	private Date processDate;
+	
+
+	public RawMaterialStock() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
+	
+
+	public RawMaterialStock(String orderId, String name, double price) {
+		super();
+		this.orderId = orderId;
+		this.name = name;
+		this.price = price;
+	}
+
 
 	public RawMaterialStock(String orderId, String name, double pricePerUnit, double quantityValue, String quantityUnit,
 			double price, String warehouseId, Date deliveryDate, Date manufactuingDate, Date expiryDate,

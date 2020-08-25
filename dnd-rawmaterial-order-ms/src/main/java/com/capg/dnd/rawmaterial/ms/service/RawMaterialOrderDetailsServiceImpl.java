@@ -1,18 +1,22 @@
 package com.capg.dnd.rawmaterial.ms.service;
 
 import java.util.List;
-
+import java.util.Optional;
 
 import javax.transaction.Transactional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.ParameterizedTypeReference;
+import org.springframework.http.HttpMethod;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.client.RestTemplate;
 
 import com.capg.dnd.rawmaterial.ms.repo.*;
+
 import com.capg.dnd.rawmaterial.ms.exceptions.IdAlreadyExistsException;
 import com.capg.dnd.rawmaterial.ms.exceptions.IdNotFoundException;
-
 import com.capg.dnd.rawmaterial.ms.model.*;
 
 
@@ -22,11 +26,13 @@ public class RawMaterialOrderDetailsServiceImpl implements RawMaterialOrderDetai
 
 	@Autowired
 	RawMaterialOrderDetailsRepo repo;
+	@Autowired
 	RestTemplate rt;
 
 	@Override
 	public RawMaterialOrderDetails addRawMaterialOrder(RawMaterialOrderDetails r) {
-		
+		// TODO Auto-generated method stub
+		//return repo.save(r);
 		if(repo.existsById(r.getOrderId())) {
 			throw new IdAlreadyExistsException("Id Already Exists");
 			
@@ -35,18 +41,15 @@ public class RawMaterialOrderDetailsServiceImpl implements RawMaterialOrderDetai
 			return repo.save(r);
 		}
 	}
-	
 
 	@Override
 	public List<RawMaterialOrderDetails> getAllRawMaterialOrders() {
 		return repo.findAll();
 	}
-	
-	
 
 	@Override
 	public RawMaterialOrderDetails getRawMaterialOrderDetailById(String orderId) {
-	
+		//return repo.getOne(orderId);
 		if(repo.existsById(orderId)) {
 			
 			return repo.getOne(orderId);
@@ -65,28 +68,19 @@ public class RawMaterialOrderDetailsServiceImpl implements RawMaterialOrderDetai
 	@Override
 	public RawMaterialOrderDetails updateRawMaterialOrder(RawMaterialOrderDetails r) {
 		return repo.save(r);
-//if(repo.exitsById(r.getOrderId())) {
-//			
-//			return repo.update(r);
-//			}
-//			else {
-//				throw new UserNotFoundException("user doesn't exist");
-//			}
-
 	}
 
-
 	@Override
-	public List<Supplier> getAllSupplierIds() {
-
-		return null;
+	public Supplier[] fetchSupplierIds() {
+		Supplier[] supplierList=
+				rt.getForObject("http://localhost:8200/supplier/all",Supplier[].class);
+						return supplierList;
 	}
 
-
 	@Override
-	public Supplier getSupplierById(String orderId) {
-	
-		return null;
+	public Supplier fetchSupplierDetail( int supplierId) {
+		Supplier supplierDetail=rt.getForObject("http://localhost:8200/supplier/id/"+supplierId , Supplier.class);
+		return supplierDetail;
 	}
 
 

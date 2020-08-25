@@ -3,7 +3,7 @@ package com.capg.dnd.rawmaterial.ms.model;
 
 import java.util.Date; 
 
-
+import javax.persistence.Column;
 import javax.persistence.Entity;
 
 import javax.persistence.Id;
@@ -14,23 +14,6 @@ import org.springframework.format.annotation.DateTimeFormat;
 @Entity
 
 public class RawMaterialOrderDetails {
-
-	public RawMaterialOrderDetails(String orderId, String name, double totalPrice) {
-		super();
-		this.orderId = orderId;
-		this.name = name;
-		this.totalPrice = totalPrice;
-	}
-
-
-
-	public RawMaterialOrderDetails(String orderId, String name) {
-		super();
-		this.orderId = orderId;
-		this.name = name;
-	}
-
-
 
 	@Id
 	
@@ -51,6 +34,13 @@ public class RawMaterialOrderDetails {
 
 public RawMaterialOrderDetails() {
 super();
+}
+
+public RawMaterialOrderDetails(String orderId, String name, double totalPrice) {
+	super();
+	this.orderId = orderId;
+	this.name = name;
+	this.totalPrice = totalPrice;
 }
 
 public RawMaterialOrderDetails(String orderId, String name, String supplierId, double quantityValue, String quantityUnit,

@@ -2,10 +2,10 @@ package com.capg.dnd.productorder.ms.model;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
-@Entity
+
 public class DistributorEntity {
 
-	@Id
+	
 	private int distributorId;
 	private String name;
 	private String address;

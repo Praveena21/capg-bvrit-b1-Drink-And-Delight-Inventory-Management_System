@@ -2,7 +2,10 @@ package com.capg.dnd.productorder.ms;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-
+import org.springframework.cloud.netflix.hystrix.EnableHystrix;
+import org.springframework.context.annotation.Bean;
+import org.springframework.web.client.RestTemplate;
+@EnableHystrix
 @SpringBootApplication
 public class DndProductorderMsApplication {
 
@@ -11,4 +14,9 @@ public class DndProductorderMsApplication {
 	   System.out.println("hello world");
 	}
 
+	@Bean
+	public RestTemplate getRestTemplate() {
+		return new RestTemplate();
+		
+	}
 }
