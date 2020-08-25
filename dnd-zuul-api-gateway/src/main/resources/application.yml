@@ -1,0 +1,38 @@
+spring:
+  application:
+    name: zuul-api-gateway-server
+    
+    
+server:
+  port: 8321
+  
+
+zuul:
+  routes:
+       dnd-distributor-details:
+             path: /distributor/**
+             service-id:  dnd-distributordetails
+             strip-prefix: false
+       dnd-supplier:
+             path : /supplier/**
+             service-id:  dnd-supplier-ms
+             strip-prefix: false
+       dnd-rawmaterialorder:
+             path: /RawMaterialOrder/**
+             service-id: dnd-rawmaterial
+             strip-prefix: false
+             
+       dnd-productstock:
+             path: /productOrder/** 
+             service-id: dnd-product-stock-ms
+             strip-prefix: false
+      
+       dnd-productorder:
+             path: /ProductOrder/**
+             service-id: dnd-productorder-ms
+             strip-prefix: false
+      
+       dnd-rawmaterialstock:
+            path: /RawMaterialStock/**
+            service-id: dnd.rawMaterialStock-ms
+            strip-prefix: false
