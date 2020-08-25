@@ -8,6 +8,7 @@ import com.capg.dnd.productstock.ms.exception.ProductOrderIdNotFoundException;
 import com.capg.dnd.productstock.ms.model.ProductStock;
 
 public interface IProductStockService {
+	
 	public ProductStock addProductStock(ProductStock stock) throws ProductOrderIdAlreadyExistsException;
 	public boolean deleteProductStock(String orderId) throws ProductOrderIdNotFoundException;
 	public ProductStock getProductStockDetails(String orderId) throws ProductOrderIdNotFoundException;

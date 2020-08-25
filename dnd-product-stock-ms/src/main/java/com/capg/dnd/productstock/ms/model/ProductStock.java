@@ -1,6 +1,7 @@
 package com.capg.dnd.productstock.ms.model;
 
 
+import java.time.LocalDateTime;
 import java.util.Date;
 
 import javax.persistence.Entity;
@@ -20,20 +21,28 @@ public class ProductStock {
 	private double totalPrice;
 	private String warehouseID;
 	//private Date deliveryDate;
-	@DateTimeFormat(pattern = "yyyy/MM/dd")
-     private Date manufacturingDate;
-	@DateTimeFormat(pattern = "yyyy/MM/dd")
-	private Date expiryDate;
+	@DateTimeFormat(pattern = "yyyy/MM/ddThh:mm:ss")
+     private LocalDateTime manufacturingDate;
+	@DateTimeFormat(pattern = "yyyy/MM/ddThh:mm:ss")
+	private LocalDateTime expiryDate;
 	private String qualityCheck;
-	@DateTimeFormat(pattern = "yyyy/MM/dd")
-	private Date processDate;
+	@DateTimeFormat(pattern = "yyyy/MM/ddThh:mm:ss")
+	private LocalDateTime processDate;
 	public ProductStock() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
+	
+	public ProductStock(String orderId, String productName, double totalPrice) {
+		super();
+		this.orderId = orderId;
+		this.productName = productName;
+		this.totalPrice = totalPrice;
+	}
+
 	public ProductStock(String orderId, String productName, double pricePerUnit, double quantityValue,
-			double totalPrice, String warehouseID, Date manufacturingDate, Date expiryDate, String qualityCheck,
-			Date processDate) {
+			double totalPrice, String warehouseID, LocalDateTime manufacturingDate, LocalDateTime expiryDate,
+			String qualityCheck, LocalDateTime processDate) {
 		super();
 		this.orderId = orderId;
 		this.productName = productName;
@@ -46,6 +55,14 @@ public class ProductStock {
 		this.qualityCheck = qualityCheck;
 		this.processDate = processDate;
 	}
+	
+
+	public ProductStock(String orderId, String productName) {
+		super();
+		this.orderId = orderId;
+		this.productName = productName;
+	}
+
 	public String getOrderId() {
 		return orderId;
 	}
@@ -82,16 +99,16 @@ public class ProductStock {
 	public void setWarehouseID(String warehouseID) {
 		this.warehouseID = warehouseID;
 	}
-	public Date getManufacturingDate() {
+	public LocalDateTime getManufacturingDate() {
 		return manufacturingDate;
 	}
-	public void setManufacturingDate(Date manufacturingDate) {
+	public void setManufacturingDate(LocalDateTime manufacturingDate) {
 		this.manufacturingDate = manufacturingDate;
 	}
-	public Date getExpiryDate() {
+	public LocalDateTime getExpiryDate() {
 		return expiryDate;
 	}
-	public void setExpiryDate(Date expiryDate) {
+	public void setExpiryDate(LocalDateTime expiryDate) {
 		this.expiryDate = expiryDate;
 	}
 	public String getQualityCheck() {
@@ -100,10 +117,10 @@ public class ProductStock {
 	public void setQualityCheck(String qualityCheck) {
 		this.qualityCheck = qualityCheck;
 	}
-	public Date getProcessDate() {
+	public LocalDateTime getProcessDate() {
 		return processDate;
 	}
-	public void setProcessDate(Date processDate) {
+	public void setProcessDate(LocalDateTime processDate) {
 		this.processDate = processDate;
 	}
 	@Override
@@ -113,6 +130,80 @@ public class ProductStock {
 				+ ", manufacturingDate=" + manufacturingDate + ", expiryDate=" + expiryDate + ", qualityCheck="
 				+ qualityCheck + ", processDate=" + processDate + "]";
 	}
+
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((expiryDate == null) ? 0 : expiryDate.hashCode());
+		result = prime * result + ((manufacturingDate == null) ? 0 : manufacturingDate.hashCode());
+		result = prime * result + ((orderId == null) ? 0 : orderId.hashCode());
+		long temp;
+		temp = Double.doubleToLongBits(pricePerUnit);
+		result = prime * result + (int) (temp ^ (temp >>> 32));
+		result = prime * result + ((processDate == null) ? 0 : processDate.hashCode());
+		result = prime * result + ((productName == null) ? 0 : productName.hashCode());
+		result = prime * result + ((qualityCheck == null) ? 0 : qualityCheck.hashCode());
+		temp = Double.doubleToLongBits(quantityValue);
+		result = prime * result + (int) (temp ^ (temp >>> 32));
+		temp = Double.doubleToLongBits(totalPrice);
+		result = prime * result + (int) (temp ^ (temp >>> 32));
+		result = prime * result + ((warehouseID == null) ? 0 : warehouseID.hashCode());
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		ProductStock other = (ProductStock) obj;
+		if (expiryDate == null) {
+			if (other.expiryDate != null)
+				return false;
+		} else if (!expiryDate.equals(other.expiryDate))
+			return false;
+		if (manufacturingDate == null) {
+			if (other.manufacturingDate != null)
+				return false;
+		} else if (!manufacturingDate.equals(other.manufacturingDate))
+			return false;
+		if (orderId == null) {
+			if (other.orderId != null)
+				return false;
+		} else if (!orderId.equals(other.orderId))
+			return false;
+		if (Double.doubleToLongBits(pricePerUnit) != Double.doubleToLongBits(other.pricePerUnit))
+			return false;
+		if (processDate == null) {
+			if (other.processDate != null)
+				return false;
+		} else if (!processDate.equals(other.processDate))
+			return false;
+		if (productName == null) {
+			if (other.productName != null)
+				return false;
+		} else if (!productName.equals(other.productName))
+			return false;
+		if (qualityCheck == null) {
+			if (other.qualityCheck != null)
+				return false;
+		} else if (!qualityCheck.equals(other.qualityCheck))
+			return false;
+		if (Double.doubleToLongBits(quantityValue) != Double.doubleToLongBits(other.quantityValue))
+			return false;
+		if (Double.doubleToLongBits(totalPrice) != Double.doubleToLongBits(other.totalPrice))
+			return false;
+		if (warehouseID == null) {
+			if (other.warehouseID != null)
+				return false;
+		} else if (!warehouseID.equals(other.warehouseID))
+			return false;
+		return true;
+	}
 	
 	
-		}
+}

@@ -17,9 +17,10 @@ import com.capg.dnd.productstock.ms.exception.ProductOrderIdAlreadyExistsExcepti
 import com.capg.dnd.productstock.ms.exception.ProductOrderIdNotFoundException;
 import com.capg.dnd.productstock.ms.model.ProductStock;
 import com.capg.dnd.productstock.ms.service.ProductStockService;
+import com.netflix.hystrix.contrib.javanica.annotation.HystrixCommand;
 
 @RestController
-@RequestMapping("/product")
+@RequestMapping("/productOrder")
 public class ProductStockController {
 	@Autowired
 	ProductStockService service;
@@ -38,10 +39,12 @@ System.out.println(stock);
 		}
 	
 	@GetMapping("/id/{orderId}")
+	@HystrixCommand(fallbackMethod = "productOrderIdNotFoundFallback")
 	public ProductStock getProductStockDetails(@PathVariable("orderId") String orderId) throws ProductOrderIdNotFoundException {
 		return service.getProductStockDetails(orderId);
 		}
 	@GetMapping("/all")
+	
 	public List<ProductStock> getAllProductStockDetails(){
 		return service.getAllProductStockDetails();
 		
@@ -58,6 +61,11 @@ System.out.println(stock);
 	
 		
 	}
-
+	
+	
+	
+	public ProductStock productOrderIdNotFoundFallback(@PathVariable("orderId") String orderId)  {
+		return new ProductStock("1000", "TV", 1000000);
+		} 
 
      }
