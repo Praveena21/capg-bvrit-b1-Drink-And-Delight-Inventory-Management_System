@@ -25,7 +25,7 @@ public class UpdateRMstockServiceImpl implements IUpdateRMStockService {
 	RawMaterialStock tempStock;
 
 	public RawMaterialStock addRawMaterialStock(RawMaterialStock stock) {
-
+System.out.println(stock);
 		return repo.save(stock);
 	}
 
@@ -39,6 +39,7 @@ public class UpdateRMstockServiceImpl implements IUpdateRMStockService {
 	}
 
 	public List<RawMaterialStock> getAllRawMaterialStockDetails() {
+		System.out.println(repo.findAll());
 		return repo.findAll();
 	}
 
