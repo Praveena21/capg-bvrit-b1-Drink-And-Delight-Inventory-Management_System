@@ -3,7 +3,7 @@ package com.capg.dnd.rawmaterial.ms.model;
 
 import java.util.Date; 
 
-import javax.persistence.Column;
+
 import javax.persistence.Entity;
 
 import javax.persistence.Id;
@@ -13,10 +13,9 @@ import org.springframework.format.annotation.DateTimeFormat;
 
 @Entity
 
-public class RawMaterialOrderDetails {
+public class RawMaterialOrderDetails extends Object {
 
 	@Id
-	
 	private String orderId;
 	private String name;
     private String supplierId;

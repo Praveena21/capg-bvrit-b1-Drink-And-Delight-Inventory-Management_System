@@ -1,7 +1,7 @@
 package com.capg.dnd.productstock.ms.model;
 
 
-import java.time.LocalDateTime;
+
 import java.util.Date;
 
 import javax.persistence.Entity;
@@ -21,16 +21,16 @@ public class ProductStock {
 	private double totalPrice;
 	private String warehouseID;
 	//private Date deliveryDate;
-	@DateTimeFormat(pattern = "yyyy/MM/ddThh:mm:ss")
-     private LocalDateTime manufacturingDate;
-	@DateTimeFormat(pattern = "yyyy/MM/ddThh:mm:ss")
-	private LocalDateTime expiryDate;
+	@DateTimeFormat(pattern = "yyyy/MM/dd")
+     private Date manufacturingDate;
+	@DateTimeFormat(pattern = "yyyy/MM/dd")
+	private Date expiryDate;
 	private String qualityCheck;
-	@DateTimeFormat(pattern = "yyyy/MM/ddThh:mm:ss")
-	private LocalDateTime processDate;
+	@DateTimeFormat(pattern = "yyyy/MM/dd")
+	private Date processDate;
 	public ProductStock() {
 		super();
-		// TODO Auto-generated constructor stub
+		
 	}
 	
 	public ProductStock(String orderId, String productName, double totalPrice) {
@@ -39,10 +39,19 @@ public class ProductStock {
 		this.productName = productName;
 		this.totalPrice = totalPrice;
 	}
+	
+
+	public ProductStock(String orderId, Date manufacturingDate, Date expiryDate, String qualityCheck) {
+		super();
+		this.orderId = orderId;
+		this.manufacturingDate = manufacturingDate;
+		this.expiryDate = expiryDate;
+		this.qualityCheck = qualityCheck;
+	}
 
 	public ProductStock(String orderId, String productName, double pricePerUnit, double quantityValue,
-			double totalPrice, String warehouseID, LocalDateTime manufacturingDate, LocalDateTime expiryDate,
-			String qualityCheck, LocalDateTime processDate) {
+			double totalPrice, String warehouseID, Date manufacturingDate, Date expiryDate, String qualityCheck,
+			Date processDate) {
 		super();
 		this.orderId = orderId;
 		this.productName = productName;
@@ -54,75 +63,88 @@ public class ProductStock {
 		this.expiryDate = expiryDate;
 		this.qualityCheck = qualityCheck;
 		this.processDate = processDate;
-	}
-	
-
-	public ProductStock(String orderId, String productName) {
-		super();
-		this.orderId = orderId;
-		this.productName = productName;
 	}
 
 	public String getOrderId() {
 		return orderId;
 	}
+
 	public void setOrderId(String orderId) {
 		this.orderId = orderId;
 	}
+
 	public String getProductName() {
 		return productName;
 	}
+
 	public void setProductName(String productName) {
 		this.productName = productName;
 	}
+
 	public double getPricePerUnit() {
 		return pricePerUnit;
 	}
+
 	public void setPricePerUnit(double pricePerUnit) {
 		this.pricePerUnit = pricePerUnit;
 	}
+
 	public double getQuantityValue() {
 		return quantityValue;
 	}
+
 	public void setQuantityValue(double quantityValue) {
 		this.quantityValue = quantityValue;
 	}
+
 	public double getTotalPrice() {
 		return totalPrice;
 	}
+
 	public void setTotalPrice(double totalPrice) {
 		this.totalPrice = totalPrice;
 	}
+
 	public String getWarehouseID() {
 		return warehouseID;
 	}
+
 	public void setWarehouseID(String warehouseID) {
 		this.warehouseID = warehouseID;
 	}
-	public LocalDateTime getManufacturingDate() {
+
+	public Date getManufacturingDate() {
 		return manufacturingDate;
 	}
-	public void setManufacturingDate(LocalDateTime manufacturingDate) {
+
+	public void setManufacturingDate(Date manufacturingDate) {
 		this.manufacturingDate = manufacturingDate;
 	}
-	public LocalDateTime getExpiryDate() {
+
+	public Date getExpiryDate() {
 		return expiryDate;
 	}
-	public void setExpiryDate(LocalDateTime expiryDate) {
+
+	public void setExpiryDate(Date expiryDate) {
 		this.expiryDate = expiryDate;
 	}
+
 	public String getQualityCheck() {
 		return qualityCheck;
 	}
+
 	public void setQualityCheck(String qualityCheck) {
 		this.qualityCheck = qualityCheck;
 	}
-	public LocalDateTime getProcessDate() {
+
+	public Date getProcessDate() {
 		return processDate;
 	}
-	public void setProcessDate(LocalDateTime processDate) {
+
+	public void setProcessDate(Date processDate) {
 		this.processDate = processDate;
 	}
+
 	@Override
 	public String toString() {
 		return "ProductStock [orderId=" + orderId + ", productName=" + productName + ", pricePerUnit=" + pricePerUnit
@@ -204,6 +226,7 @@ public class ProductStock {
 			return false;
 		return true;
 	}
+
 	
-	
+		
 }

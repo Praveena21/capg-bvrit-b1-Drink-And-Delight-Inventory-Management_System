@@ -1,7 +1,7 @@
 package com.capg.dnd.productstock.ms.service;
 
 
-import java.time.LocalDateTime;
+
 
 import java.util.List;
 
@@ -70,23 +70,22 @@ public class ProductStockService implements IProductStockService {
 		ProductOrder order = rt.getForObject("http://localhost:8700/ProductOrder/GetProductOrderDetail/"+newStock.getOrderId(), ProductOrder.class);
 		System.out.println(newStock);
 		System.out.println(order);
-		//if( order.getOrderId()==newStock.getOrderId()) {
 		
-			tempStock.setOrderId(order.getOrderId());	
-			tempStock.setProductName(newStock.getProductName());
-			tempStock.setPricePerUnit(newStock.getPricePerUnit());
-			tempStock.setQuantityValue(newStock.getQuantityValue());
-			tempStock.setTotalPrice(newStock.getTotalPrice());
-			tempStock.setWarehouseID(newStock.getWarehouseID());
-			
-    //ProductStock oldStock=repo.getOne(newStock.getOrderId());
-	//validateExpiryDate(newStock.getManufacturingDate(), newStock.getExpiryDate());
+		if(order.getOrderId().equals(newStock.getOrderId())){
+		 
+	tempStock.setOrderId(newStock.getOrderId());
+	
 	tempStock.setManufacturingDate(newStock.getManufacturingDate());
 	tempStock.setExpiryDate(newStock.getExpiryDate());
 	tempStock.setQualityCheck(newStock.getQualityCheck());
 	System.out.println("tempStock"+repo.save(tempStock));
 	
 	return repo.save(tempStock);
+		}
+		else 
+			throw new  ProductOrderIdNotFoundException("orderId doesn't exist");
+		
+	}}
 		
 		//}
 //		else {
@@ -101,22 +100,24 @@ public class ProductStockService implements IProductStockService {
 		 */
 
 		
-	}
+	//}
 
-	@Override
-	public String updateProcessDate(String orderId) throws ProductOrderIdNotFoundException {
-		if(repo.existsById(orderId)) {
-		ProductStock stock=repo.getOne(orderId);
-		stock.setProcessDate(LocalDateTime.now());
-		repo.save(stock);
-			return "Successfully updated processDate";
-			}
-			else {
-				throw new ProductOrderIdNotFoundException("orderId doesn't exist");
-			}
 	
-		
-	}
+
+//	@Override
+//	public String updateProcessDate(String orderId) throws ProductOrderIdNotFoundException {
+//		if(repo.existsById(orderId)) {
+//		ProductStock stock=repo.getOne(orderId);
+//		stock.setProcessDate(LocalDateTime.now());
+//		repo.save(stock);
+//			return "Successfully updated processDate";
+//			}
+//			else {
+//				throw new ProductOrderIdNotFoundException("orderId doesn't exist");
+//			}
+//	
+//		
+//	}
 
 //	public static boolean validateExpiryDate(LocalDateTime manufacturingDate,LocalDateTime expiryDate) throws InvalidExpiryDateException  {
 //	//if(manufacturingDate < LocalDateTime.now())
@@ -124,4 +125,45 @@ public class ProductStockService implements IProductStockService {
 //		return false;
 //		
 //	}
-}
+//}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+//
+////if( order.getOrderId()==newStock.getOrderId()) {
+//
+//tempStock.setOrderId(order.getOrderId());	
+//tempStock.setProductName(newStock.getProductName());
+//tempStock.setPricePerUnit(newStock.getPricePerUnit());
+//tempStock.setQuantityValue(newStock.getQuantityValue());
+//tempStock.setTotalPrice(newStock.getTotalPrice());
+//tempStock.setWarehouseID(newStock.getWarehouseID());
+//
+////ProductStock oldStock=repo.getOne(newStock.getOrderId());
+////validateExpiryDate(newStock.getManufacturingDate(), newStock.getExpiryDate());

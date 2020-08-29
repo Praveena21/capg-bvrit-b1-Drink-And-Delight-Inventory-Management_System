@@ -1,16 +1,15 @@
 package com.capg.dnd.rawmaterial.ms.service;
 
 import java.util.List;
-import java.util.Optional;
+
 
 import javax.transaction.Transactional;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.core.ParameterizedTypeReference;
-import org.springframework.http.HttpMethod;
-import org.springframework.http.ResponseEntity;
+
+
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.PathVariable;
+
 import org.springframework.web.client.RestTemplate;
 
 import com.capg.dnd.rawmaterial.ms.repo.*;
@@ -81,6 +80,14 @@ public class RawMaterialOrderDetailsServiceImpl implements RawMaterialOrderDetai
 	public Supplier fetchSupplierDetail( int supplierId) {
 		Supplier supplierDetail=rt.getForObject("http://localhost:8200/supplier/id/"+supplierId , Supplier.class);
 		return supplierDetail;
+	}
+
+	@Override
+	public RawMaterialOrderDetails update(String orderId, String deliveryStatus) {
+		RawMaterialOrderDetails order=repo.getOne(orderId);
+		order.setDeliveryStatus(deliveryStatus);
+		
+		return repo.save(order);
 	}
 
 

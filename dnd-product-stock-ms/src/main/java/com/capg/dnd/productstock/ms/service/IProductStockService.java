@@ -14,6 +14,6 @@ public interface IProductStockService {
 	public ProductStock getProductStockDetails(String orderId) throws ProductOrderIdNotFoundException;
 	public List<ProductStock> getAllProductStockDetails();
 	public ProductStock updateProductStockDetails(ProductStock newStock) throws ProductOrderIdNotFoundException, InvalidExpiryDateException;
-	public String updateProcessDate(String OrderId) throws ProductOrderIdNotFoundException;
+	//public String updateProcessDate(String OrderId) throws ProductOrderIdNotFoundException;
 
 }

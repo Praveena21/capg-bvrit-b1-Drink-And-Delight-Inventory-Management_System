@@ -12,14 +12,12 @@ import com.capg.dnd.productstock.ms.model.ProductStock;
 @EnableEurekaClient
 @SpringBootApplication
 public class DndProductStockMsApplication {
-
 	public static void main(String[] args) {
 		SpringApplication.run(DndProductStockMsApplication.class, args);
 		System.out.println("hi project started");
 	}
-@Bean
-	
 
+@Bean
 	public RestTemplate getRestTemplate() {
 		return new RestTemplate();
 		

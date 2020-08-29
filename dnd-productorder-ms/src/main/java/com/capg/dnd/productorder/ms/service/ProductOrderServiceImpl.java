@@ -6,12 +6,10 @@ package com.capg.dnd.productorder.ms.service;
 import java.util.List;
 
 import javax.annotation.PostConstruct;
-import javax.jws.soap.InitParam;
+
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.core.ParameterizedTypeReference;
-import org.springframework.http.HttpMethod;
-import org.springframework.http.ResponseEntity;
+
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
@@ -32,6 +30,7 @@ public class ProductOrderServiceImpl implements IProductOrderService {
 	
 	@Autowired
 	IProductOrderRepo repo;
+	
 	@Autowired
 	RestTemplate rt;
 
@@ -47,7 +46,9 @@ public class ProductOrderServiceImpl implements IProductOrderService {
 
 	@Override
 	public List<ProductOrder> getAllProductOrders() {
+		//System.out.println(repo.findAll());
 		return repo.findAll();
+		
 	}
 
 	@Override
@@ -65,6 +66,7 @@ public class ProductOrderServiceImpl implements IProductOrderService {
 	public ProductOrder updateProductOrder(ProductOrder order) {
 		return repo.save(order);
 	}
+	
 
 	@Override
 	public DistributorEntity[] fetchDistributorIds() {
@@ -80,6 +82,14 @@ System.out.println(distributorList);
 	public DistributorEntity fetchDistributorDetail(int distributorId) {
 		DistributorEntity distributorDetail=rt.getForObject("http://localhost:8800/distributor/id/"+distributorId , DistributorEntity.class);
 		return distributorDetail;
+	}
+
+	@Override
+	public ProductOrder update(String orderId, String deliveryStatus) {
+		ProductOrder order=repo.getOne(orderId);
+		order.setDeliveryStatus(deliveryStatus);
+		
+		return repo.save(order);
 	}
 
 

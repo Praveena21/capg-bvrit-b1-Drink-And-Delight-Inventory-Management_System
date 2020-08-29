@@ -21,6 +21,12 @@ public RawMaterialOrderDetails() {
 super();
 }
 
+public RawMaterialOrderDetails(String orderId, String deliveryStatus) {
+	super();
+	this.orderId = orderId;
+	this.deliveryStatus = deliveryStatus;
+}
+
 public RawMaterialOrderDetails(String orderId, String name, String supplierId, double quantityValue, String quantityUnit,
 Date dateOfOrder, Date dateOfDelivery, double pricePerUnit, double totalPrice, String deliveryStatus,
 String warehouseId) {

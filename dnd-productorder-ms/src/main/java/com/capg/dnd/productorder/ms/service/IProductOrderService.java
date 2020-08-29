@@ -21,6 +21,7 @@ public interface IProductOrderService {
 		void deleteProductOrder(String orderId);
 
 		ProductOrder updateProductOrder(ProductOrder order);
+		ProductOrder update(String orderId,String deliveryStatus);
 		
 		DistributorEntity[] fetchDistributorIds();
 		

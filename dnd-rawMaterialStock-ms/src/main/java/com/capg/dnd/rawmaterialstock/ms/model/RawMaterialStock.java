@@ -36,6 +36,15 @@ public class RawMaterialStock {
 	}
 	
 
+	public RawMaterialStock(String orderId, Date manufactuingDate, Date expiryDate, String qualityCheck) {
+		super();
+		this.orderId = orderId;
+		this.manufactuingDate = manufactuingDate;
+		this.expiryDate = expiryDate;
+		this.qualityCheck = qualityCheck;
+	}
+
+
 	public RawMaterialStock(String orderId, String name, double price) {
 		super();
 		this.orderId = orderId;

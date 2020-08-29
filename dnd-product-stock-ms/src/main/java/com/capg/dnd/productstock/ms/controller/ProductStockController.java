@@ -3,6 +3,7 @@ package com.capg.dnd.productstock.ms.controller;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -20,7 +21,8 @@ import com.capg.dnd.productstock.ms.service.ProductStockService;
 import com.netflix.hystrix.contrib.javanica.annotation.HystrixCommand;
 
 @RestController
-@RequestMapping("/productOrder")
+@CrossOrigin(origins= {"http://localhost:4200"})
+@RequestMapping("/productStock")
 public class ProductStockController {
 	@Autowired
 	ProductStockService service;
@@ -39,8 +41,9 @@ System.out.println(stock);
 		}
 	
 	@GetMapping("/id/{orderId}")
-	@HystrixCommand(fallbackMethod = "productOrderIdNotFoundFallback")
+	//@HystrixCommand(fallbackMethod = "productOrderIdNotFoundFallback")
 	public ProductStock getProductStockDetails(@PathVariable("orderId") String orderId) throws ProductOrderIdNotFoundException {
+		System.out.println(orderId);
 		return service.getProductStockDetails(orderId);
 		}
 	@GetMapping("/all")
@@ -54,13 +57,7 @@ System.out.println(stock);
 		
 		return service.updateProductStockDetails(stock);
 		}
-	
-	@PutMapping("/processDate/{orderId}") 
-	public String updateProcessDate(@PathVariable("orderId") String orderId) throws ProductOrderIdNotFoundException {
-		return service.updateProcessDate(orderId);
-	
-		
-	}
+
 	
 	
 	
@@ -69,3 +66,22 @@ System.out.println(stock);
 		} 
 
      }
+
+
+
+
+
+
+
+
+
+
+
+
+//
+//@PutMapping("/processDate/{orderId}") 
+//public String updateProcessDate(@PathVariable("orderId") String orderId) throws ProductOrderIdNotFoundException {
+//	return service.updateProcessDate(orderId);
+//
+//	
+//}

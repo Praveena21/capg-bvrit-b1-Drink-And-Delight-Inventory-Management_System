@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 
 import org.springframework.web.bind.annotation.GetMapping;
@@ -18,13 +19,15 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+
 import com.capg.dnd.rawmaterial.ms.exceptions.*;
 import com.capg.dnd.rawmaterial.ms.model.*;
 import com.capg.dnd.rawmaterial.ms.service.*;
-import com.netflix.hystrix.contrib.javanica.annotation.HystrixCommand;
+
 
 
 @RestController
+@CrossOrigin(origins= {"http://localhost:4200"})
 @RequestMapping(value="/RawMaterialOrder")
 public class RawMaterialOrderDetailsController {
 
@@ -37,17 +40,6 @@ public class RawMaterialOrderDetailsController {
 		
 		return serviceobj.addRawMaterialOrder(r);
 		}
-//	public ResponseEntity<String>addRawMaterialOrder(@RequestBody RawMaterialOrderDetails r )
-//	{
-//		RawMaterialOrderDetails e = serviceobj.addRawMaterialOrder(r);
-//		if(e == null)
-//		{
-//			throw new IdNotFoundException("Enter Valid Id");
-//		}
-//		else {
-//			return new ResponseEntity<String>("RawMaterialOrder placed by praneeth successfully",new HttpHeaders(),HttpStatus.OK);		
-//		}
-//	}
 
 	//Get all RawMaterialOrders
 	@GetMapping(value="/all")
@@ -56,30 +48,13 @@ public class RawMaterialOrderDetailsController {
 		List<RawMaterialOrderDetails> RawMaterialOrderlist = serviceobj.getAllRawMaterialOrders();
 		return new ResponseEntity<List<RawMaterialOrderDetails>>(RawMaterialOrderlist, HttpStatus.OK);
         }
-	
-	// Get Particular RawMaterialorderDetail
-		//	@GetMapping(value="/GetRawmaterialOrderDetail/{orderId}")
-			//private ResponseEntity<RawMaterialOrderDetails> getRawMaterialOrderDetailsById(@PathVariable("orderId") String orderId) {
-				//RawMaterialOrderDetails d = serviceobj.getRawMaterialOrderDetailById(orderId);
-				//if (d == null) {
-					//throw new IdNotFoundException("Id does not exist,so we couldn't fetch details");
-			//	} else {
-				//	return new ResponseEntity<RawMaterialOrderDetails>(d,  HttpStatus.OK);
-				//}
-				
-			//}
+
 			@GetMapping("/id/{orderId}")
-			@HystrixCommand(fallbackMethod = "idNotFoundFallback")
+			//@HystrixCommand(fallbackMethod = "idNotFoundFallback")
 			public RawMaterialOrderDetails getRawNaterialOrderDetails(@PathVariable("orderId") String orderId) throws IdNotFoundException {
 				return serviceobj.getRawMaterialOrderDetailById(orderId);
 				}
-//			@GetMapping(value= "/Supplierdetails/{orderid}")
-//			private Optional<SupplierDetails> getSuplierDetails(@PathVariable("orderid") int order_id) {
-//				Optional<SupplierDetails> details=serviceobj.getSuplierDetails(order_id);
-//				
-//				return details; 
-//			}
-	
+
 			
     //Update RawMaterialOrder
     @PutMapping(value="/UpdateUser")
@@ -93,6 +68,15 @@ public class RawMaterialOrderDetailsController {
 			}
 		}
 		
+	@PutMapping(value = "/Update/{orderId}/{deliveryStatus}")
+	public ResponseEntity<String> update(@PathVariable ("orderId") String orderId,@PathVariable ("deliveryStatus") String deliveryStatus) {
+		RawMaterialOrderDetails e = serviceobj.update(orderId,deliveryStatus);
+		if (e == null) {
+			throw new IdNotFoundException("Update Operation Unsuccessful,Provided Id does not exist");
+		} else {
+			return new ResponseEntity<String>("ProductOrder updated successfully", new HttpHeaders(), HttpStatus.OK);
+		}
+	}
 	// Delete RawMaterialOrder
 	@DeleteMapping(value="/DeleteRawMaterialOrder/{orderId}")
 	private ResponseEntity<String> deleteRawMaterialOrder(@PathVariable("orderId") String orderId)
