@@ -32,12 +32,13 @@ public class RawMaterialStockController {
 	
 	@PostMapping("/add")
 	public ResponseEntity<RawMaterialStock> addRawMaterialStock(@RequestBody RawMaterialStock stock) {
-		return new ResponseEntity<RawMaterialStock>(stock,HttpStatus.OK);
+		
+		return new ResponseEntity<RawMaterialStock>(service.addRawMaterialStock(stock),HttpStatus.OK);
 	}
 	
 	@DeleteMapping("/delete/{orderId}")
 
-	public boolean deleteRawMaterialStock(@PathVariable("OrderId") String orderId) {
+	public boolean deleteRawMaterialStock(@PathVariable("orderId") String orderId) {
 		return service.deleteRawMaterialStock(orderId);
 	}
 	@GetMapping("/id/{orderId}")
