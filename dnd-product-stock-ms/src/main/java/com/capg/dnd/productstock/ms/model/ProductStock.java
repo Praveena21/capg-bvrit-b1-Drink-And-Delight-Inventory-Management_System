@@ -16,8 +16,6 @@ import java.util.Date;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
-
-
 import org.springframework.format.annotation.DateTimeFormat;
 /**
 * The Product Stock Model class 
