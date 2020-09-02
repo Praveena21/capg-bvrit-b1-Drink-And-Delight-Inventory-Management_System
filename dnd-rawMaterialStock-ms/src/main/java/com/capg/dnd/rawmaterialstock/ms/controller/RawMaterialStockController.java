@@ -31,6 +31,7 @@ public class RawMaterialStockController {
 	UpdateRMstockServiceImpl service;
 	
 	@PostMapping("/add")
+
 	public ResponseEntity<RawMaterialStock> addRawMaterialStock(@RequestBody RawMaterialStock stock) {
 		
 		return new ResponseEntity<RawMaterialStock>(service.addRawMaterialStock(stock),HttpStatus.OK);
