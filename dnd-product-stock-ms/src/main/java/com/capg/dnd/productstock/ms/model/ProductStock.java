@@ -1,3 +1,13 @@
+
+
+/**
+	* Project Name : Drink And Delight Inventory Management System
+	*
+	* 
+**/
+
+
+
 package com.capg.dnd.productstock.ms.model;
 
 
@@ -9,6 +19,14 @@ import javax.persistence.Id;
 
 
 import org.springframework.format.annotation.DateTimeFormat;
+/**
+* The Product Stock Model class 
+*
+* @author   :Devu Om SriDatta Sai Swaroop
+* @version  :1.0
+* @since    :2020-08-13 
+**/
+
 @Entity
 
 public class ProductStock {
@@ -17,10 +35,10 @@ public class ProductStock {
 	private String productName;
 	private double pricePerUnit;
 	private double quantityValue;
-	//private String quantityUnit;
+	
 	private double totalPrice;
 	private String warehouseID;
-	//private Date deliveryDate;
+	private Date deliveryDate;
 	@DateTimeFormat(pattern = "yyyy/MM/dd")
      private Date manufacturingDate;
 	@DateTimeFormat(pattern = "yyyy/MM/dd")
@@ -41,6 +59,12 @@ public class ProductStock {
 	}
 	
 
+	public ProductStock(String orderId, String productName) {
+		super();
+		this.orderId = orderId;
+		this.productName = productName;
+	}
+
 	public ProductStock(String orderId, Date manufacturingDate, Date expiryDate, String qualityCheck) {
 		super();
 		this.orderId = orderId;
@@ -50,8 +74,8 @@ public class ProductStock {
 	}
 
 	public ProductStock(String orderId, String productName, double pricePerUnit, double quantityValue,
-			double totalPrice, String warehouseID, Date manufacturingDate, Date expiryDate, String qualityCheck,
-			Date processDate) {
+			double totalPrice, String warehouseID, Date deliveryDate, Date manufacturingDate, Date expiryDate,
+			String qualityCheck, Date processDate) {
 		super();
 		this.orderId = orderId;
 		this.productName = productName;
@@ -59,6 +83,7 @@ public class ProductStock {
 		this.quantityValue = quantityValue;
 		this.totalPrice = totalPrice;
 		this.warehouseID = warehouseID;
+		this.deliveryDate = deliveryDate;
 		this.manufacturingDate = manufacturingDate;
 		this.expiryDate = expiryDate;
 		this.qualityCheck = qualityCheck;
@@ -113,6 +138,14 @@ public class ProductStock {
 		this.warehouseID = warehouseID;
 	}
 
+	public Date getDeliveryDate() {
+		return deliveryDate;
+	}
+
+	public void setDeliveryDate(Date deliveryDate) {
+		this.deliveryDate = deliveryDate;
+	}
+
 	public Date getManufacturingDate() {
 		return manufacturingDate;
 	}
@@ -149,14 +182,15 @@ public class ProductStock {
 	public String toString() {
 		return "ProductStock [orderId=" + orderId + ", productName=" + productName + ", pricePerUnit=" + pricePerUnit
 				+ ", quantityValue=" + quantityValue + ", totalPrice=" + totalPrice + ", warehouseID=" + warehouseID
-				+ ", manufacturingDate=" + manufacturingDate + ", expiryDate=" + expiryDate + ", qualityCheck="
-				+ qualityCheck + ", processDate=" + processDate + "]";
+				+ ", deliveryDate=" + deliveryDate + ", manufacturingDate=" + manufacturingDate + ", expiryDate="
+				+ expiryDate + ", qualityCheck=" + qualityCheck + ", processDate=" + processDate + "]";
 	}
 
 	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
+		result = prime * result + ((deliveryDate == null) ? 0 : deliveryDate.hashCode());
 		result = prime * result + ((expiryDate == null) ? 0 : expiryDate.hashCode());
 		result = prime * result + ((manufacturingDate == null) ? 0 : manufacturingDate.hashCode());
 		result = prime * result + ((orderId == null) ? 0 : orderId.hashCode());
@@ -183,6 +217,11 @@ public class ProductStock {
 		if (getClass() != obj.getClass())
 			return false;
 		ProductStock other = (ProductStock) obj;
+		if (deliveryDate == null) {
+			if (other.deliveryDate != null)
+				return false;
+		} else if (!deliveryDate.equals(other.deliveryDate))
+			return false;
 		if (expiryDate == null) {
 			if (other.expiryDate != null)
 				return false;
@@ -226,7 +265,5 @@ public class ProductStock {
 			return false;
 		return true;
 	}
-
-	
 		
 }

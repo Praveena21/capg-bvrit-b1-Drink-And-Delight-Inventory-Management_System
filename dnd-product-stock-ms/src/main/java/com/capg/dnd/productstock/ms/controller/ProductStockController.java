@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.capg.dnd.productstock.ms.exception.InvalidExpiryDateException;
+import com.capg.dnd.productstock.ms.exception.NoProductStocksAreAvailableException;
 import com.capg.dnd.productstock.ms.exception.ProductOrderIdAlreadyExistsException;
 import com.capg.dnd.productstock.ms.exception.ProductOrderIdNotFoundException;
 import com.capg.dnd.productstock.ms.model.ProductStock;
@@ -48,7 +49,7 @@ System.out.println(stock);
 		}
 	@GetMapping("/all")
 	
-	public List<ProductStock> getAllProductStockDetails(){
+	public List<ProductStock> getAllProductStockDetails() throws NoProductStocksAreAvailableException{
 		return service.getAllProductStockDetails();
 		
 	}

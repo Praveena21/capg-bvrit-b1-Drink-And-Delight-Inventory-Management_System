@@ -23,7 +23,7 @@ zuul:
              strip-prefix: false
              
        dnd-productstock:
-             path: /productOrder/** 
+             path: /productStock/** 
              service-id: dnd-product-stock-ms
              strip-prefix: false
       

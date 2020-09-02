@@ -1,8 +1,15 @@
+
+/**
+	* Project Name : Drink And Delight Inventory Management System
+	*
+	* 
+**/
+
 package com.capg.dnd.productstock.ms.service;
 
 
-
-
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,6 +17,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
 import com.capg.dnd.productstock.ms.exception.InvalidExpiryDateException;
+import com.capg.dnd.productstock.ms.exception.NoProductStocksAreAvailableException;
 import com.capg.dnd.productstock.ms.exception.ProductOrderIdAlreadyExistsException;
 import com.capg.dnd.productstock.ms.exception.ProductOrderIdNotFoundException;
 import com.capg.dnd.productstock.ms.model.ProductOrder;
@@ -25,6 +33,14 @@ public class ProductStockService implements IProductStockService {
    RestTemplate rt;
    @Autowired
    ProductStock tempStock;
+   
+   /**
+	* Adds a New ProductStock in the repository
+	* @return   :ProductStock Object
+	* @throws   :ProductOrderIdAlreadyExistsException
+	* @author   :Devu Om SriDatta Sai Swaroop
+	* @since    :2020-08-17 
+	**/
 	@Override
 	public ProductStock addProductStock(ProductStock stock) throws ProductOrderIdAlreadyExistsException {
 		if(repo.existsById(stock.getOrderId())) {
@@ -35,6 +51,15 @@ public class ProductStockService implements IProductStockService {
 		
 	}
 		}
+	
+	/**
+	* Deletes a specified ProductStock in the  repository
+	* @return   :Boolean
+	* @throws   :ProductOrderIdNotFoundException
+	* @author   :Devu Om SriDatta Sai Swaroop
+	 
+	* @since    :2020-08-17 
+	**/
 
 	@Override
 	public boolean deleteProductStock(String orderId) throws ProductOrderIdNotFoundException {
@@ -47,6 +72,17 @@ public class ProductStockService implements IProductStockService {
 		return !repo.existsById(orderId);
 	}
 
+	
+
+	
+	
+	/**
+	* Fetches a ProductStock by taking specified orderId as input parameter
+	* @return   :ProductStock Object 
+	* @throws   :ProductOrderIdNotFoundException 
+	* @author   :Devu Om SriDatta Sai Swaroop
+	* @since    :2020-08-17 
+	**/
 	@Override
 	public ProductStock getProductStockDetails(String orderId) throws ProductOrderIdNotFoundException {
 		if(repo.existsById(orderId)) {
@@ -58,25 +94,52 @@ public class ProductStockService implements IProductStockService {
 			}
 		
 	}
-
+	/**
+	* Fetches all ProductStockDetails in the repository
+	* @return   :List of ProductStock  
+	* @throws   :NoProductStocksAreAvailableException
+	* @author   :Devu Om SriDatta Sai Swaroop
+	* @since    :2020-08-17 
+	**/
 	@Override
-	public List<ProductStock> getAllProductStockDetails() {
+	public List<ProductStock> getAllProductStockDetails() throws NoProductStocksAreAvailableException  {
 		
 		return repo.findAll();
 	}
 
+	/**
+	* updates a ProductStock in the repository
+	* @return   :ProductStock Object
+	* @throws   :ProductOrderIdNotFoundException,InvalidExpiryDateException
+	* @author   :Devu Om SriDatta Sai Swaroop
+	* @since    :2020-08-17 
+	**/
 	@Override
 	public ProductStock updateProductStockDetails(ProductStock newStock) throws ProductOrderIdNotFoundException, InvalidExpiryDateException {
-		ProductOrder order = rt.getForObject("http://localhost:8700/ProductOrder/GetProductOrderDetail/"+newStock.getOrderId(), ProductOrder.class);
+		ProductOrder order = rt.getForObject("http://DND-PRODUCTORDER-MS/ProductOrder/GetProductOrderDetail/"+newStock.getOrderId(), ProductOrder.class);
 		System.out.println(newStock);
 		System.out.println(order);
 		
 		if(order.getOrderId().equals(newStock.getOrderId())){
+			
+			
 		 
 	tempStock.setOrderId(newStock.getOrderId());
+	tempStock.setProductName(order.getName());
+	tempStock.setPricePerUnit(order.getPricePerunit());
+	tempStock.setQuantityValue(order.getQuantityValue());
+	tempStock.setTotalPrice(order.getTotalPrice());
+	tempStock.setWarehouseID(order.getWarehouseId());
+	tempStock.setDeliveryDate(order.getDateofDelivery());
+	tempStock.setProcessDate(new Date());
+	if(validateExpiryDate(newStock.getManufacturingDate(),newStock.getExpiryDate())) {
 	
 	tempStock.setManufacturingDate(newStock.getManufacturingDate());
 	tempStock.setExpiryDate(newStock.getExpiryDate());
+	}
+	else
+		throw new InvalidExpiryDateException("Enter Valid Expiry Date");
+	
 	tempStock.setQualityCheck(newStock.getQualityCheck());
 	System.out.println("tempStock"+repo.save(tempStock));
 	
@@ -85,47 +148,43 @@ public class ProductStockService implements IProductStockService {
 		else 
 			throw new  ProductOrderIdNotFoundException("orderId doesn't exist");
 		
-	}}
-		
-		//}
-//		else {
-//			System.out.println("hello stock");
-//			throw new ProductOrderIdNotFoundException("orderId doesn't exist");
-//		}
-		/*
-		 * oldStock.setManufacturingDate(newStock.getManufacturingDate());
-		 * oldStock.setExpiryDate(newStock.getExpiryDate());
-		 * 
-		 * oldStock.setQualityCheck(newStock.getQualityCheck());
-		 */
-
-		
-	//}
-
+	}
 	
 
-//	@Override
-//	public String updateProcessDate(String orderId) throws ProductOrderIdNotFoundException {
-//		if(repo.existsById(orderId)) {
-//		ProductStock stock=repo.getOne(orderId);
-//		stock.setProcessDate(LocalDateTime.now());
-//		repo.save(stock);
-//			return "Successfully updated processDate";
-//			}
-//			else {
-//				throw new ProductOrderIdNotFoundException("orderId doesn't exist");
-//			}
-//	
-//		
-//	}
+		
 
-//	public static boolean validateExpiryDate(LocalDateTime manufacturingDate,LocalDateTime expiryDate) throws InvalidExpiryDateException  {
-//	//if(manufacturingDate < LocalDateTime.now())
-//		
-//		return false;
-//		
-//	}
-//}
+	/**
+	* Validates Whether Manufacturing Date And Expiry Date are Valid or Not
+	* @return   :Boolean
+	* @throws   :InvalidExpiryDateException
+	* @author   :Devu Om SriDatta Sai Swaroop
+	* @since    :2020-08-17 
+	**/
+
+
+
+	public  boolean validateExpiryDate(Date manufacturingDate,Date expiryDate) throws InvalidExpiryDateException  {
+		 SimpleDateFormat sdformat = new SimpleDateFormat("yyyy-MM-dd");
+	    
+	      System.out.println("The date 1 is: " + sdformat.format(manufacturingDate));
+	      System.out.println("The date 2 is: " + sdformat.format(expiryDate));
+	      if(manufacturingDate.compareTo(expiryDate) > 0) {
+	         System.out.println("Date 1 occurs after Date 2");
+	          throw new InvalidExpiryDateException("Enter Valid Expiry Date");
+	          
+	      } else if(manufacturingDate.compareTo(expiryDate) < 0) {
+	    	  
+	         System.out.println("Date 1 occurs before Date 2");
+	         return true;
+	      } else if(manufacturingDate.compareTo(expiryDate) == 0) {
+	         System.out.println("Both dates are equal");
+	         throw new InvalidExpiryDateException("Enter Valid Date");
+	      }
+		return false;
+		
+		
+	}
+}
 
 
 
