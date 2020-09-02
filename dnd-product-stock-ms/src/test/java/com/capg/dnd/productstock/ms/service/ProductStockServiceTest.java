@@ -25,15 +25,15 @@ class ProductStockServiceTest {
 	
 	@BeforeAll
 	void addSampleStock() throws ProductOrderIdAlreadyExistsException {
-		stock =new ProductStock("8654", "car");
-		if(!repo.existsById("8654")) {
+		stock =new ProductStock("9368", "car");
+		if(!repo.existsById("9368")) {
 			service.addProductStock(stock);
 			
 		}
 	}
 	@Test
 	void testAddProductStock() throws ProductOrderIdAlreadyExistsException {
-		ProductStock sentStock=new ProductStock("3845", "Laptop");
+		ProductStock sentStock=new ProductStock("8645", "Laptop");
 		ProductStock addRawMaterialStock= service.addProductStock(sentStock);
 		assertEquals(sentStock,addRawMaterialStock);
 	}
@@ -41,7 +41,7 @@ class ProductStockServiceTest {
 
 	@Test
 	void testGetProductStockDetails() throws ProductOrderIdNotFoundException {
-		assertTrue(service.getProductStockDetails("8654")!=null);
+		assertTrue(service.getProductStockDetails("9368")!=null);
 	}
 
 	@Test
