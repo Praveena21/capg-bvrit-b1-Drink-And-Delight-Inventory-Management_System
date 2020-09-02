@@ -36,8 +36,7 @@ import com.netflix.hystrix.contrib.javanica.annotation.HystrixCommand;
 @CrossOrigin(origins= {"http://localhost:4200"})
 @RequestMapping(value = "/ProductOrder")
 public class ProductOrderController {
-	@Autowired
-	ApplicationContext context ;
+
 	
 	@PostConstruct
 	void init() {
@@ -50,8 +49,7 @@ public class ProductOrderController {
 
 	// Add ProductOrder
 	@PostMapping(value = "/addProductOrder")
-	public ResponseEntity<ProductOrder> addProductOrder(@RequestBody ProductOrder r)
-			throws ProductOrderIdAlreadyExistsException {
+	public ResponseEntity<ProductOrder> addProductOrder(@RequestBody ProductOrder r) throws ProductOrderIdAlreadyExistsException {
 		ProductOrder e = serviceobj.addProductOrder(r);
 		if (e == null) {
 			throw new ProductOrderIdNotFoundException("Enter Valid Id");
@@ -64,11 +62,7 @@ public class ProductOrderController {
 	// Get all ProductOrders
 	@GetMapping(value = "/GetAllProductOrders")
 	private ResponseEntity<List<ProductOrder>> getAllOrders() {
-		System.err.println(serviceobj);
-		serviceobj=context.getBean(ProductOrderServiceImpl.class);
-		if(serviceobj==null)
-		{ throw new ResponseStatusException(HttpStatus.NOT_FOUND);
-		}
+		
 		List<ProductOrder> ProductOrderlist = serviceobj.getAllProductOrders();
 		
 		System.out.println(ProductOrderlist);

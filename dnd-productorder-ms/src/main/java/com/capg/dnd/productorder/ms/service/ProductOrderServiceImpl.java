@@ -70,8 +70,8 @@ public class ProductOrderServiceImpl implements IProductOrderService {
 
 	@Override
 	public DistributorEntity[] fetchDistributorIds() {
-DistributorEntity[] distributorList= rt.getForObject("http://localhost:8800/distributor/all", DistributorEntity[].class);
-//rt.exchange("http://localhost:8800/distributor/all", HttpMethod.GET, null, new ParameterizedTypeReference<List<DistributorEntity>>() {
+DistributorEntity[] distributorList= rt.getForObject("http://DND-DISTRIBUTORDETAILS-MS/distributor/all", DistributorEntity[].class);
+
 
 System.out.println(distributorList);
 		return distributorList;
@@ -80,7 +80,7 @@ System.out.println(distributorList);
 
 	@Override
 	public DistributorEntity fetchDistributorDetail(int distributorId) {
-		DistributorEntity distributorDetail=rt.getForObject("http://localhost:8800/distributor/id/"+distributorId , DistributorEntity.class);
+		DistributorEntity distributorDetail=rt.getForObject("http://DND-DISTRIBUTORDETAILS-MS/distributor/id/"+distributorId , DistributorEntity.class);
 		return distributorDetail;
 	}
 
