@@ -12,7 +12,6 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-
 import com.capg.dnd.productstock.ms.exception.InvalidExpiryDateException;
 import com.capg.dnd.productstock.ms.exception.NoProductStocksAreAvailableException;
 import com.capg.dnd.productstock.ms.exception.ProductOrderIdAlreadyExistsException;
@@ -40,13 +39,7 @@ System.out.println(stock);
 	public boolean deleteProductStock(@PathVariable("orderId") String orderId) throws ProductOrderIdNotFoundException {
 		return service.deleteProductStock(orderId);
 		}
-	
-	@GetMapping("/id/{orderId}")
-	//@HystrixCommand(fallbackMethod = "productOrderIdNotFoundFallback")
-	public ProductStock getProductStockDetails(@PathVariable("orderId") String orderId) throws ProductOrderIdNotFoundException {
-		System.out.println(orderId);
-		return service.getProductStockDetails(orderId);
-		}
+
 	@GetMapping("/all")
 	
 	public List<ProductStock> getAllProductStockDetails() throws NoProductStocksAreAvailableException{
@@ -61,6 +54,12 @@ System.out.println(stock);
 
 	
 	
+	@GetMapping("/id/{orderId}")
+	@HystrixCommand(fallbackMethod = "productOrderIdNotFoundFallback")
+	public ProductStock getProductStockDetails(@PathVariable("orderId") String orderId) throws ProductOrderIdNotFoundException {
+		System.out.println(orderId);
+		return service.getProductStockDetails(orderId);
+		}
 	
 	public ProductStock productOrderIdNotFoundFallback(@PathVariable("orderId") String orderId)  {
 		return new ProductStock("1000", "TV", 1000000);
@@ -79,10 +78,4 @@ System.out.println(stock);
 
 
 
-//
-//@PutMapping("/processDate/{orderId}") 
-//public String updateProcessDate(@PathVariable("orderId") String orderId) throws ProductOrderIdNotFoundException {
-//	return service.updateProcessDate(orderId);
-//
-//	
-//}
+

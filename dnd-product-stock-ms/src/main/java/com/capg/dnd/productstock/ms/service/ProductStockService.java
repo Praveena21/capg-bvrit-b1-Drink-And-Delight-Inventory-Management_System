@@ -211,16 +211,3 @@ public class ProductStockService implements IProductStockService {
 
 
 
-
-//
-////if( order.getOrderId()==newStock.getOrderId()) {
-//
-//tempStock.setOrderId(order.getOrderId());	
-//tempStock.setProductName(newStock.getProductName());
-//tempStock.setPricePerUnit(newStock.getPricePerUnit());
-//tempStock.setQuantityValue(newStock.getQuantityValue());
-//tempStock.setTotalPrice(newStock.getTotalPrice());
-//tempStock.setWarehouseID(newStock.getWarehouseID());
-//
-////ProductStock oldStock=repo.getOne(newStock.getOrderId());
-////validateExpiryDate(newStock.getManufacturingDate(), newStock.getExpiryDate());

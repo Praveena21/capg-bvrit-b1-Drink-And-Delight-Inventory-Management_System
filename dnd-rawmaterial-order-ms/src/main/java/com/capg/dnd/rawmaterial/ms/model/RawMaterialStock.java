@@ -1,14 +1,13 @@
-package com.capg.dnd.rawmaterialstock.ms.model;
+package com.capg.dnd.rawmaterial.ms.model;
+
 
 import java.util.Date;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
-import org.springframework.format.annotation.DateTimeFormat;
-
 @Entity
-
+@Table
 
 public class RawMaterialStock {
 
@@ -20,38 +19,11 @@ public class RawMaterialStock {
 	private String quantityUnit;
 	private double price;
 	private String warehouseId;
-	@DateTimeFormat(pattern="yyyy/MM/dd")
-    private Date deliveryDate;
-	@DateTimeFormat(pattern="yyyy/MM/dd")
+	private Date deliveryDate;
 	private Date manufactuingDate;
-	@DateTimeFormat(pattern="yyyy/MM/dd")
-    private Date expiryDate;
+	private Date expiryDate;
 	private String qualityCheck;
 	private Date processDate;
-	
-
-	public RawMaterialStock() {
-		super();
-		// TODO Auto-generated constructor stub
-	}
-	
-
-	public RawMaterialStock(String orderId, Date manufactuingDate, Date expiryDate, String qualityCheck) {
-		super();
-		this.orderId = orderId;
-		this.manufactuingDate = manufactuingDate;
-		this.expiryDate = expiryDate;
-		this.qualityCheck = qualityCheck;
-	}
-
-
-	public RawMaterialStock(String orderId, String name, double price) {
-		super();
-		this.orderId = orderId;
-		this.name = name;
-		this.price = price;
-	}
-
 
 	public RawMaterialStock(String orderId, String name, double pricePerUnit, double quantityValue, String quantityUnit,
 			double price, String warehouseId, Date deliveryDate, Date manufactuingDate, Date expiryDate,
