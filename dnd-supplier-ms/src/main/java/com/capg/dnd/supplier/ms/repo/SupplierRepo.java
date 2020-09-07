@@ -6,6 +6,6 @@ import org.springframework.stereotype.Repository;
 import com.capg.dnd.supplier.ms.model.Supplier;
 
 @Repository
-public interface SupplierRepo extends JpaRepository<Supplier,Long>{
+public interface SupplierRepo extends JpaRepository<Supplier,Integer>{
 
 }

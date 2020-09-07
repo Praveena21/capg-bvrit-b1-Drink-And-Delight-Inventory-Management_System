@@ -5,13 +5,12 @@ import org.springframework.web.bind.annotation.RestController;
 import com.capg.dnd.supplier.ms.model.Supplier;
 import com.capg.dnd.supplier.ms.service.SupplierServiceImpl;
 
-import io.micrometer.core.ipc.http.HttpSender.Response;
-
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -22,6 +21,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
+@CrossOrigin(origins= {"http://localhost:4200"})
 @RequestMapping("/supplier")
 public class SupplierController {
 	
@@ -40,11 +40,11 @@ public class SupplierController {
 	}
 
  @DeleteMapping("/delete/{supplierId}")
-public boolean deleteSupplier(@PathVariable("supplierId") Long supplierId) {
+public boolean deleteSupplier(@PathVariable("supplierId") int supplierId) {
 	return service.deleteSupplier(supplierId);
 }
 @GetMapping("/id/{supplierId}")
-public ResponseEntity<Supplier>getSupplierById(@PathVariable("supplierId") Long supplierId) {
+public ResponseEntity<Supplier>getSupplierById(@PathVariable("supplierId") int supplierId) {
 
 return new ResponseEntity<Supplier>(service.getSupplierById(supplierId),HttpStatus.OK);
 }
@@ -58,8 +58,9 @@ public Supplier updateSupplier(@RequestBody Supplier supplier)
 {
 	return service.updateSupplier(supplier);
 }
+
 @GetMapping("/RMdetails/{supplierId}")
-public Supplier fetchRawMaterialDetails(Long supplierId,String delivereyStatus) {
+public List fetchRawMaterialDetails(@PathVariable("supplierId") int supplierId) {
 	return null;
 	
 }

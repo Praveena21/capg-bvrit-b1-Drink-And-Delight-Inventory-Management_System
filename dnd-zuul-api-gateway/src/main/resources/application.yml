@@ -11,7 +11,7 @@ zuul:
   routes:
        dnd-distributor-details:
              path: /distributor/**
-             service-id:  dnd-distributordetails
+             service-id:  dnd-distributordetails-ms
              strip-prefix: false
        dnd-supplier:
              path : /supplier/**
